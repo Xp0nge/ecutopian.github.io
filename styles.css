@@ -1,157 +1,262 @@
-/* --- RESET & BASIC STYLES --- */
+/* Core Styling & Custom Color Variables */
+:root {
+    --primary-forest: #1b4332;
+    --accent-lime: #70e000;
+    --cta-yellow: #ffb703;
+    --bg-charcoal: #121212;
+    --bg-card: #1e1e1e;
+    --text-light: #ffffff;
+    --text-muted: #b3b3b3;
+}
+
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 body {
-    font-family: Arial, sans-serif;
+    background-color: var(--bg-charcoal);
+    color: var(--text-light);
     line-height: 1.6;
-    background-color: #f9f9f9;
+    overflow-x: hidden;
 }
-.container {
-    width: 90%;
+
+.section-container {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 60px 0;
+    padding: 40px 20px;
 }
 
-/* --- PLACEHOLDER BOXES: Centers text labels inside image frames --- */
-.bg-placeholder {
-    width: 100%;
-    height: 70vh;
-    background-color: #cccccc;
-    border: 3px dashed #666666;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    font-weight: bold;
-}
-.image-placeholder {
-    background-color: #dddddd;
-    border: 3px dashed #888888;
-    height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-/* --- FIXED NAVIGATION HEADER --- */
-.navbar {
-    position: fixed;
+/* Header & Desktop Menu */
+.main-header {
+    background-color: var(--primary-forest);
+    position: sticky;
     top: 0;
-    width: 100%;
-    height: 70px;
-    background: #ffffff;
+    z-index: 1000;
+    border-bottom: 2px solid var(--accent-lime);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    z-index: 1000;
-}
-.logo { font-weight: bold; font-size: 1.2rem; }
-.nav-links { display: flex; align-items: center; gap: 20px; }
-.nav-links a { text-decoration: none; color: #333; font-weight: 500; }
-.btn-appointment {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    border-radius: 4px;
+    padding: 20px;
 }
 
-/* --- HAMBURGER MENU BUTTON (Hidden by default on Desktop) --- */
+.logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.nav-menu {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-link {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent-lime);
+}
+
 .hamburger {
     display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: transparent;
+    background: none;
     border: none;
+    color: var(--text-light);
+    font-size: 1.5rem;
     cursor: pointer;
 }
-.hamburger .bar {
-    width: 25px;
-    height: 3px;
-    background-color: #333;
-    transition: 0.3s;
+
+/* Hero Section & Hostinger Styling Copy */
+.hero-section {
+    padding: 60px 0;
+    text-align: center;
 }
 
-/* --- HERO TEXT OVERLAY --- */
-.hero-section { position: relative; margin-top: 70px; }
-.hero-content {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255,255,255,0.85);
-    padding: 20px 40px;
+.hero-tagline {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    padding: 20px;
+    border: 1px dashed rgba(255,255,255,0.2);
+}
+
+/* Custom Tab Interface CSS */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.tab-btn {
+    background-color: var(--primary-forest);
+    color: var(--text-light);
+    border: 1px solid var(--accent-lime);
+    padding: 12px 30px;
+    font-size: 1rem;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover, .tab-btn.active {
+    background-color: var(--accent-lime);
+    color: var(--bg-charcoal);
+    font-weight: 600;
+}
+
+.tab-content-wrapper {
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 8px;
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-/* --- ABOUT SECTION ROWS --- */
-.about-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-top: 40px;
-    align-items: center;
-}
-.about-row.reverse {
-    direction: rtl; /* Swaps grid order for Row 2 */
-}
-.about-row.reverse .about-text {
-    direction: ltr; /* Keeps text reading left-to-right */
-}
-
-/* --- NEWSLETTER BOX --- */
-.contact-section { text-align: center; background: #eaeaea; }
-.subscribe-box { max-width: 400px; margin: 20px auto 0; }
-.subscribe-box input { padding: 10px; width: 70%; margin-right: 5px; }
-.btn-submit { padding: 10px 15px; background: #28a745; color: white; border: none; cursor: pointer; }
-.status-msg { margin-top: 10px; font-weight: bold; color: #28a745; }
-
-/* --- MODAL POPUP WINDOW --- */
-.modal {
+.tab-panel {
     display: none;
+}
+
+.tab-panel.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Call To Action & Email Capture Form CSS */
+.cta-section {
+    background-color: var(--primary-forest);
+    text-align: center;
+    padding: 80px 0;
+    border-top: 2px solid var(--accent-lime);
+}
+
+.cta-heading {
+    font-size: 2.5rem;
+    color: var(--accent-lime);
+    margin-bottom: 15px;
+}
+
+.cta-subtext {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+    color: var(--text-light);
+}
+
+.contact-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.contact-form input[type="email"] {
+    flex: 1;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid var(--accent-lime);
+    background-color: var(--bg-charcoal);
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.cta-btn {
+    background-color: var(--cta-yellow);
+    color: var(--bg-charcoal);
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: #e6a300;
+}
+
+.form-feedback {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Floating Messenger Icon Button Styling */
+.messenger-float {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 2000; justify-content: center; align-items: center;
+    bottom: 30px;
+    right: 30px;
+    background-color: #0084FF;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    text-decoration: none;
+    z-index: 9999;
+    transition: transform 0.3s ease;
 }
-.modal-content { background: white; padding: 40px; border-radius: 8px; position: relative; }
-.close-btn { position: absolute; top: 10px; right: 20px; font-size: 1.5rem; cursor: pointer; }
 
-/* ==========================================
-   RESPONSIVE LAYOUTS (iPad & Tablets)
-   ========================================== */
+.messenger-float:hover {
+    transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Mobile Layout Breakpoints */
 @media (max-width: 768px) {
-    .hamburger { display: flex; } /* Shows hamburger icon */
-    
-    /* Converts top bar links into a hidden side drawer sliding from the right */
-    .nav-links {
-        position: fixed;
-        top: 70px; right: -100%;
-        width: 250px; height: 100vh;
-        background: #ffffff;
-        flex-direction: column;
-        padding-top: 40px;
-        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-        transition: 0.3s;
+    .header-container {
+        position: relative;
     }
-    .nav-links.active { right: 0; } /* Slides menu out when active */
-
-    /* Changes row items to stack vertically instead of side-by-side */
-    .about-row, .about-row.reverse { grid-template-columns: 1fr; direction: ltr; gap: 20px; }
-}
-
-/* ==========================================
-   RESPONSIVE LAYOUTS (Mobile Phones)
-   ========================================== */
-@media (max-width: 480px) {
-    .nav-links { width: 100%; } /* Makes menu full screen on tiny devices */
-    .subscribe-box input { width: 100%; margin-bottom: 10px; }
+    .hamburger {
+        display: block;
+    }
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--primary-forest);
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        gap: 15px;
+    }
+    .nav-menu.active {
+        display: flex;
+    }
+    .contact-form {
+        flex-direction: column;
+    }
+    .tab-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .tab-btn {
+        border-radius: 4px;
+    }
 }
