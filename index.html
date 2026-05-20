@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecutopian Design and Consultancy</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Font Awesome for Mockup Icons -->
+    <!-- Font Awesome Icons Provider Link -->
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body>
 
-    <!-- Sticky Navigation Header -->
+    <!-- Sticky Header Navigation -->
     <header class="main-header">
         <div class="header-container">
             <div class="logo">Ecutopian Design and Consultancy</div>
             <nav class="nav-menu" id="navMenu">
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#home" class="nav-link">Features</a>
+                <a href="#offers" class="nav-link">Portfolio</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </nav>
@@ -26,215 +26,217 @@
         </div>
     </header>
 
-    <!-- Main Hero Section -->
-    <section class="hero-section">
-        <div class="hero-bg-overlay"></div>
+    <!-- Main Hero Banner Section Section -->
+    <section id="home" class="hero-section">
         <div class="section-container hero-grid">
-            <div class="hero-text-content">
-                <span class="hero-subtext">ARCHITECTURE & INTERIOR DESIGN</span>
-                <h1 class="hero-title">EVOLVE YOUR SPACE</h1>
-                <p class="hero-description">Ecutopian Design and Consultancy creates beautiful structures and custom interiors through visionary organic design.</p>
-                <a href="#contact" class="hero-explore-btn">EXPLORE MORE <i class="fas fa-arrow-right"></i></a>
+            <div class="hero-text-side">
+                <p class="hero-tag">We design for future</p>
+                <h1>EVOLVE YOUR SPACE</h1>
+                <p class="hero-desc">Custom spaces designed for home, offices, and commercial projects. Transform spaces through nature, organic materials, and futuristic architectures.</p>
+                <a href="#contact" class="explore-link">EXPLORE MORE <i class="fas fa-arrow-right"></i></a>
             </div>
             
-            <!-- Target Cards with Bottom-Up Gradients and Zoom Effects -->
-            <div class="hero-cards-container">
-                <div class="preview-card">
-                    <div class="card-image-wrapper">
-                        <img src="https://unsplash.com" alt="Urban Spaces Architecture">
-                        <div class="card-gradient-overlay"></div>
-                    </div>
-                    <div class="card-label">Urban Spaces</div>
+            <div class="hero-cards-side">
+                <!-- Dual Image Hover Zoom Element Node Elements -->
+                <div class="zoom-card">
+                    <img src="https://unsplash.com" alt="Sleek Modern Home Architecture Design Layout" class="card-img">
+                    <span class="card-title">Sleek Home</span>
                 </div>
-                <div class="preview-card">
-                    <div class="card-image-wrapper">
-                        <img src="https://unsplash.com" alt="Commercial Interiors">
-                        <div class="card-gradient-overlay"></div>
-                    </div>
-                    <div class="card-label">Commercial Interiors</div>
+                <div class="zoom-card">
+                    <img src="https://unsplash.com" alt="Commercial Organic Office Design Layout Setup" class="card-img">
+                    <span class="card-title">Commercial</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- What We Offer Feature Grid -->
-    <section id="features" class="features-section">
+    <!-- What We Offer Feature Matrix Grid Section Section -->
+    <section id="offers" class="offers-section">
         <div class="section-container">
             <h2 class="section-title">WHAT WE OFFER</h2>
-            <p class="section-subtitle">Comprehensive interior design services tailored to bring your vision to life, integrating vibrant colors and nature.</p>
+            <p class="section-subtitle">Comprehensive interior design services tailored to bring your spaces to life, integrating vibrant colors and nature.</p>
             
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <i class="fas fa-lightbulb"></i>
                     <h3>Innovative Concepts</h3>
-                    <p>Unique blueprints dynamically styled around eco-materials and open layout paths.</p>
+                    <p>Unique creative directions carefully built to optimize natural lighting and space layout structures.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-pencil-ruler"></i></div>
+                <div class="offer-card">
+                    <i class="fas fa-sliders-h"></i>
                     <h3>Personalized Design</h3>
-                    <p>Tailored solutions reflecting your personal aesthetic preferences cleanly.</p>
+                    <p>Tailored solutions matching your personal functional needs and stylistic preferences completely.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-cubes"></i></div>
+                <div class="offer-card">
+                    <i class="fas fa-cube"></i>
                     <h3>Complete Solutions</h3>
-                    <p>From initial sketches to final site dressing, we handle every details phase.</p>
+                    <p>From architectural drafts and planning to material procurement and staging installation.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-award"></i></div>
+                <div class="offer-card">
+                    <i class="fas fa-award"></i>
                     <h3>Premium Quality</h3>
-                    <p>Exceptional workmanship and attention given to materials selection rules.</p>
+                    <p>Exceptional craftsmanship and careful monitoring applied meticulously across all execution processes.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Our Work Portfolio Slider Section -->
-    <section id="portfolio" class="portfolio-section">
+    <!-- Interactive Carousel Showcase Slider Section Section -->
+    <section class="work-section">
         <div class="section-container">
-            <h2 class="section-title text-center">OUR WORK</h2>
-            <p class="section-subtitle text-center">Explore our portfolio of organic modern architecture interior design.</p>
+            <h2 class="section-title">OUR WORK</h2>
+            <p class="section-subtitle">Explore our portfolio of organic and modern interior design.</p>
             
-            <div class="slider-wrapper">
-                <button class="slider-arrow prev" id="prevSlide" aria-label="Previous Project"><i class="fas fa-chevron-left"></i></button>
-                <div class="slider-container">
-                    <div class="portfolio-slider" id="portfolioSlider">
-                        <div class="slide-item active">
-                            <img src="https://unsplash.com" alt="Innovative Workspace">
-                            <div class="slide-caption">
-                                <span class="caption-tag">COMMERCIAL</span>
-                                <h3>Innovative Workspace</h3>
-                            </div>
+            <div class="carousel-viewport">
+                <button class="carousel-btn prev" id="prevBtn" aria-label="Previous image pointer row item"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn next" id="nextBtn" aria-label="Next image pointer row item"><i class="fas fa-chevron-right"></i></button>
+                
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Portfolio Image Slides -->
+                    <div class="carousel-slide">
+                        <img src="https://unsplash.com" alt="Innovative Architectural Workspace Setup">
+                        <div class="carousel-caption">
+                            <span class="slide-tag">COMMERCIAL</span>
+                            <h3>Innovative Workspace</h3>
                         </div>
-                        <div class="slide-item">
-                            <img src="https://unsplash.com" alt="Eco Living Complex">
-                            <div class="slide-caption">
-                                <span class="caption-tag">RESIDENTIAL</span>
-                                <h3>Eco Living Complex</h3>
-                            </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://unsplash.com" alt="Minimalist Organic Interior Living Lounge Concept">
+                        <div class="carousel-caption">
+                            <span class="slide-tag">RESIDENTIAL</span>
+                            <h3>Organic Living Lounge</h3>
                         </div>
                     </div>
                 </div>
-                <button class="slider-arrow next" id="nextSlide" aria-label="Next Project"><i class="fas fa-chevron-right"></i></button>
+                
+                <div class="carousel-dots" id="carouselDots"></div>
             </div>
-            <div class="slider-dots" id="sliderDots"></div>
         </div>
     </section>
 
-    <!-- About Our Studio Counter Section -->
+    <!-- About Studio & Milestone Counter Data Blocks Section Section -->
     <section id="about" class="about-section">
         <div class="section-container about-grid">
-            <div class="about-text-content">
+            <div class="about-text">
                 <h2 class="section-title">ABOUT OUR STUDIO</h2>
-                <p>Our team of passionate designers is dedicated to creating spaces that inspire and delight. With over a decade of experience, we have transformed countless residential and commercial environments, turning concepts into vibrant real-world works.</p>
-                <p class="mt-20">Our approach combines timeless design principles with a vibrant palette and organic materials, ensuring every project feels beautiful and practical.</p>
+                <p>We are a team of passionate designers dedicated to creating spaces that inspire and elevate. With over a decade of experience, we have transformed countless residential and commercial spaces into vibrant, modern environments where nature meets design layout elements.</p>
+                <p>Our approach combines timeless design principles with a playful use of styling and organic materials, ensuring every project is both beautiful and practical.</p>
             </div>
-            <div class="about-stats-container">
-                <div class="stat-box">
-                    <div class="stat-icon"><i class="fas fa-trophy"></i></div>
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Awards Won</div>
+            
+            <div class="counters-shelf">
+                <div class="counter-card">
+                    <i class="fas fa-trophy"></i>
+                    <span class="counter-number">50+</span>
+                    <span class="counter-label">Awards Won</span>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-icon"><i class="fas fa-users"></i></div>
-                    <div class="stat-number">200+</div>
-                    <div class="stat-label">Happy Clients</div>
+                <div class="counter-card">
+                    <i class="fas fa-smile"></i>
+                    <span class="counter-number">200+</span>
+                    <span class="counter-label">Happy Clients</span>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
-                    <div class="stat-number">10+</div>
-                    <div class="stat-label">Years Experience</div>
+                <div class="counter-card">
+                    <i class="fas fa-briefcase"></i>
+                    <span class="counter-number">10+</span>
+                    <span class="counter-label">Years Experience</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Ready to Transform Transformation Banner -->
-    <section class="transformation-banner">
-        <div class="section-container text-center">
-            <h2 class="banner-heading">Ready to transform your space?</h2>
-            <p class="banner-subtext">Let's turn your ideas into reality. Our team is ready to craft the perfect environment tailored exactly to your vision.</p>
-            <a href="#contact" class="banner-cta-btn">Start Your Project <i class="fas fa-chevron-right"></i></a>
+    <!-- Center Call To Action Grid Node Block Section Section -->
+    <section class="middle-cta-section">
+        <div class="section-container">
+            <h2>Ready to transform your space?</h2>
+            <p>Let's turn your ideas into reality. Our team is ready to craft the perfect environment tailored exactly to your vision.</p>
+            <a href="#contact" class="action-btn">Start Your Project <i class="fas fa-arrow-right" style="margin-left:8px;"></i></a>
         </div>
     </section>
 
-    <!-- Get In Touch & Contact Form Layout -->
+    <!-- Contact Info Row & Full Database Lead Input Sheet Form Section Section -->
     <section id="contact" class="contact-section">
         <div class="section-container contact-grid">
-            <div class="contact-info-panel">
+            <div class="info-column">
                 <h2 class="section-title">GET IN TOUCH</h2>
-                <p class="contact-lead-text">Ready to transform your space? Let's start a conversation.</p>
+                <p class="section-subtitle" style="margin-bottom: 20px;">Ready to transform your space? Let's start a conversation.</p>
                 
-                <div class="info-link-row">
-                    <div class="info-circle-icon"><i class="fas fa-envelope"></i></div>
-                    <div class="info-text-details">
-                        <span>hello@ecutopianprofile.com</span>
+                <div class="info-block">
+                    <div class="info-icon-box"><i class="fas fa-envelope"></i></div>
+                    <div class="info-text-box">
+                        <h4>Email</h4>
+                        <p>hello@ecutopianprofile.com</p>
                     </div>
                 </div>
-                <div class="info-link-row">
-                    <div class="info-circle-icon"><i class="fas fa-phone-alt"></i></div>
-                    <div class="info-text-details">
-                        <span>+1 (555) 123-4567</span>
+                
+                <div class="info-block">
+                    <div class="info-icon-box"><i class="fas fa-phone"></i></div>
+                    <div class="info-text-box">
+                        <h4>Phone</h4>
+                        <p>+1 (555) 123-4567</p>
                     </div>
                 </div>
-                <div class="info-link-row">
-                    <div class="info-circle-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <div class="info-text-details">
-                        <span>New York, NY 10001</span>
+                
+                <div class="info-block">
+                    <div class="info-icon-box"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="info-text-box">
+                        <h4>Location</h4>
+                        <p>New York, NY 10001</p>
                     </div>
                 </div>
             </div>
             
-            <div class="contact-form-panel">
-                <form id="ecutopianLeadForm" class="mockup-form-layout">
-                    <div class="form-group">
+            <div class="form-column">
+                <form id="ecutopianContactForm">
+                    <div class="input-group">
                         <label for="clientName">Name</label>
-                        <input type="text" id="clientName" name="name" placeholder="John Doe" required>
+                        <input type="text" id="clientName" name="name" placeholder="Your Name" required>
                     </div>
-                    <div class="form-group">
+                    <div class="input-group">
                         <label for="clientEmail">Email</label>
-                        <input type="email" id="clientEmail" name="email" placeholder="john@company.com" required>
+                        <input type="email" id="clientEmail" name="email" placeholder="hello@company.com" required>
                     </div>
-                    <div class="form-group">
-                        <label for="clientMessage">Message</label>
-                        <textarea id="clientMessage" name="message" rows="4" placeholder="Tell us about your space..." required></textarea>
+                    <div class="input-group">
+                        <label for="clientMsg">Message</label>
+                        <textarea id="clientMsg" name="message" rows="5" placeholder="Discuss with us..." required></textarea>
                     </div>
-                    <button type="submit" class="form-submit-btn">Send Message</button>
+                    <button type="submit" class="submit-form-btn">Send Message</button>
+                    <div id="formFeedback" class="form-feedback"></div>
                 </form>
-                <div id="formFeedbackMessage" class="form-response-text"></div>
             </div>
         </div>
     </section>
 
-    <!-- Comprehensive Mockup Layout Footer -->
+    <!-- Main Footer Information Area Links Section Section -->
     <footer class="main-footer">
         <div class="section-container footer-grid">
-            <div class="footer-brand-column">
-                <h3>Ecutopian</h3>
-                <p>Transforming spaces into extraordinary experiences through hardware, innovations, and organic layouts.</p>
+            <div class="footer-brand">
+                <h4>Evolved</h4>
+                <p>Transforming spaces into extraordinary experiences through a unique blend of modern design layout architecture, sustainability, and vibrant organic texture elements.</p>
             </div>
-            <div class="footer-links-column">
-                <h4>Quick Links</h4>
-                <a href="#features">What we offer</a>
-                <a href="#portfolio">Our work</a>
-                <a href="#about">About us</a>
-                <a href="#contact">Contact</a>
+            <div class="footer-links">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="#home">What we offer</a></li>
+                    <li><a href="#offers">Our work</a></li>
+                    <li><a href="#about">About us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
             </div>
-            <div class="footer-social-column">
-                <h4>Follow us</h4>
-                <div class="social-icons-wrapper">
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <div class="footer-social">
+                <h5>Follow Us</h5>
+                <div class="social-icons-row">
+                    <a href="https://instagram.com" class="social-link-circle" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="https://facebook.com" class="social-link-circle" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://pinterest.com" class="social-link-circle" target="_blank" rel="noopener noreferrer"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="https://linkedin.com" class="social-link-circle" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom-copyright">
-            &copy; 2026 Ecutopian. All rights reserved.
+        <div class="footer-copyright">
+            <p>&copy; 2026 Ecutopian. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Floating Messenger Chat Button -->
+    <!-- Floating Messenger Chat Link Button Overlay Hook -->
     <a href="https://m.me" class="messenger-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on Messenger">
         <i class="fab fa-facebook-messenger"></i>
     </a>
