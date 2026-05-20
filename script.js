@@ -1,158 +1,97 @@
-document.addEventListener('DOMContentLoaded', () => {
+// 1. Mobile Menu Toggle Control System
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const navMenu = document.getElementById('navMenu');
 
-    // --- MOBILE HAMBURGER MENU INTERACTIVE TRANSITIONS ---
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const navMenu = document.getElementById('navMenu');
-
-    if (hamburgerBtn && navMenu) {
-        hamburgerBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            const icon = hamburgerBtn.querySelector('i');
-            if (navMenu.classList.contains('active')) {
-                icon.classList.replace('fa-bars', 'fa-times');
-            } else {
-                icon.classList.replace('fa-times', 'fa-bars');
-            }
-        });
-
-        // Close mobile dropdown container drawers upon navigation link selection clicks
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                hamburgerBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
-            });
-        });
+hamburgerBtn.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    const icon = hamburgerBtn.querySelector('i');
+    if (navMenu.classList.contains('active')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+    } else {
+        icon.classList.replace('fa-times', 'fa-bars');
     }
+});
 
+// Close nav drawer on click
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        hamburgerBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+    });
+});
 
-    // --- CYCLE CAROUSEL SLIDER ENGINE SYSTEM ---
-    const slides = document.querySelectorAll('.slide-item');
-    const pips = document.querySelectorAll('.pip');
-    const prevBtn = document.getElementById('prevSlide');
-    const nextBtn = document.getElementById('nextSlide');
-    let currentIdx = 0;
-    let slideInterval;
+// 2. Interactive Portfolio Carousel Logic
+const track = document.getElementById('carouselTrack');
+const slides = Array.from(track.children);
+const nextBtn = document.getElementById('nextBtn');
+const prevBtn = document.getElementById('prevBtn');
+const dotContainer = document.getElementById('carouselDots');
 
-    if (slides.length > 0) {
-        function showSlide(index) {
-            // Edge constraint loop bounds normalization
-            if (index >= slides.length) currentIdx = 0;
-            else if (index < 0) currentIdx = slides.length - 1;
-            else currentIdx = index;
+let currentIndex = 0;
 
-            // Strip active indicators from structural nodes
-            slides.forEach(slide => slide.classList.remove('active'));
-            pips.forEach(pip => pip.classList.remove('active'));
+// Programmatically construct tracking dot indicators
+slides.forEach((_, idx) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (idx === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => moveSlide(idx));
+    dotContainer.appendChild(dot);
+});
 
-            // Map current visibility flags to structural arrays
-            slides[currentIdx].classList.add('active');
-            if (pips[currentIdx]) pips[currentIdx].classList.add('active');
-        }
+const dots = Array.from(dotContainer.children);
 
-        function nextSlide() {
-            showSlide(currentIdx + 1);
-        }
+function moveSlide(index) {
+    if (index < 0) index = slides.length - 1;
+    if (index >= slides.length) index = 0;
+    
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dots[currentIndex].classList.remove('active');
+    dots[index].classList.add('active');
+    currentIndex = index;
+}
 
-        function prevSlide() {
-            showSlide(currentIdx - 1);
-        }
+nextBtn.addEventListener('click', () => moveSlide(currentIndex + 1));
+prevBtn.addEventListener('click', () => moveSlide(currentIndex - 1));
 
-        // Event listener hooks for manual slider controls
-        if (nextBtn) nextBtn.addEventListener('click', () => { resetAutoCycle(); nextSlide(); });
-        if (prevBtn) prevBtn.addEventListener('click', () => { resetAutoCycle(); prevSlide(); });
+// Auto-run carousel slide presentation sequence loop
+let slideInterval = setInterval(() => moveSlide(currentIndex + 1), 5000);
+document.getElementById('work').addEventListener('mouseenter', () => clearInterval(slideInterval));
+document.getElementById('work').addEventListener('mouseleave', () => {
+    slideInterval = setInterval(() => moveSlide(currentIndex + 1), 5000);
+});
 
-        pips.forEach((pip, index) => {
-            pip.addEventListener('click', () => {
-                resetAutoCycle();
-                showSlide(index);
-            });
-        });
+// 3. Google Apps Script Lead Submission Integration Handler
+const contactForm = document.getElementById('ecutopianContactForm');
+const formFeedback = document.getElementById('formFeedback');
 
-        // Loop automation callback hooks
-        function startAutoCycle() {
-            slideInterval = setInterval(nextSlide, 5000); // Transitions automatically every 5 seconds
-        }
-
-        function resetAutoCycle() {
-            clearInterval(slideInterval);
-            startAutoCycle();
-        }
-
-        // Initialize active configuration loop tracks
-        startAutoCycle();
-    }
-
-
-    // --- HIGH-UTILITY DYNAMIC SECTION SCROLL SPY TRACKER ---
-    const scrollSections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    function scrollSpyEngine() {
-        const currentScrollY = window.scrollY + 120; // Structural offset matching custom stick header thickness definitions
-
-        scrollSections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-
-            if (currentScrollY >= sectionTop && currentScrollY < sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    }
-    window.addEventListener('scroll', scrollSpyEngine);
-
-
-    // --- BACKEND WEB APP FORM SUBMISSION LOGIC INTERFACES ---
-    const contactForm = document.getElementById('studioContactForm');
-    const formFeedback = document.getElementById('formFeedback');
-
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Collect values from the DOM
-            const clientName = document.getElementById('clientName').value;
-            const clientEmail = document.getElementById('clientEmail').value;
-            const clientMessage = document.getElementById('clientMessage').value;
-
-            // Provide visual loading confirmation cues
-            formFeedback.style.color = 'var(--cta-yellow)';
-            formFeedback.textContent = 'Processing request transmission...';
-
-            // Google Apps Script Web App Deployment endpoint configuration
-            const webAppURL = 'REPL_WITH_APPS_SCRIPT_WEB_APP_URL';
-
-            // Convert regular JS parameters into URL-encoded search layout blocks
-            const dataPayload = new URLSearchParams({
-                'name': clientName,
-                'email': clientEmail,
-                'message': clientMessage
-            });
-
-            fetch(webAppURL, {
-                method: 'POST',
-                mode: 'no-cors', // Bypasses cross-domain validation requirements for directly hitting Google App script engines
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: dataPayload
-            })
-            .then(() => {
-                formFeedback.style.color = 'var(--accent-lime)';
-                formFeedback.textContent = 'Message delivered! Our consulting team will contact you shortly.';
-                contactForm.reset();
-            })
-            .catch(error => {
-                console.error('Transmission Failure:', error);
-                formFeedback.style.color = '#ff4d4d';
-                formFeedback.textContent = 'Network communication error. Please check your connection and retry.';
-            });
-        });
-    }
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    formFeedback.style.color = '#ffb703';
+    formFeedback.textContent = 'Sending message...';
+    
+    // REPLACE WITH YOUR ACTUAL DEPLOYED GOOGLE APPS SCRIPT MACRO LINK STRING
+    const webAppUrl = 'REPL_WITH_APPS_SCRIPT_WEB_APP_URL';
+    
+    const formData = new URLSearchParams();
+    formData.append('name', document.getElementById('clientName').value);
+    formData.append('email', document.getElementById('clientEmail').value);
+    formData.append('message', document.getElementById('clientMsg').value);
+    
+    fetch(webAppUrl, {
+        method: 'POST',
+        mode: 'no-cors', // Direct validation rule configuration layer for Google web apps cross-origin parsing
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData
+    })
+    .then(() => {
+        formFeedback.style.color = '#70e000';
+        formFeedback.textContent = 'Thank you! Your message was delivered successfully.';
+        contactForm.reset();
+    })
+    .catch(err => {
+        console.error('Data Submission Error Log:', err);
+        formFeedback.style.color = '#ff4d4d';
+        formFeedback.textContent = 'Submission unexpected fault. Verify your API link configuration parameter.';
+    });
 });
