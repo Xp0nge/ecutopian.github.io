@@ -1,71 +1,74 @@
-// Waits for the HTML document to fully load before running scripts
-document.addEventListener("DOMContentLoaded", () => {
+// Mobile Hamburger Menu Handler
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const navMenu = document.getElementById('navMenu');
+
+hamburgerBtn.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
     
-    // Select elements for interactions
-    const hamburger = document.getElementById("hamburger-btn");
-    const navMenu = document.getElementById("nav-menu");
-    const appointmentBtn = document.getElementById("appointment-btn");
-    const modal = document.getElementById("appointment-modal");
-    const closeModal = document.getElementById("close-modal");
-    const subscribeForm = document.getElementById("subscribe-form");
-    const statusMsg = document.getElementById("subscribe-status");
+    // Toggle menu icon between bars and X close sign
+    const icon = hamburgerBtn.querySelector('i');
+    if (navMenu.classList.contains('active')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+    } else {
+        icon.classList.replace('fa-times', 'fa-bars');
+    }
+});
 
-    // --- NEWSLETTER FORM SUBMISSION (GOOGLE SHEETS INTEGRATION) ---
-    subscribeForm.addEventListener("submit", (e) => {
-        e.preventDefault(); // Stops the website from reloading
-        
-        const emailValue = document.getElementById("email-input").value;
-        statusMsg.textContent = "Submitting... Please wait.";
-        statusMsg.style.color = "#007bff";
-
-        // 👇 PASTE YOUR GOOGLE WEB APP URL LINK INSIDE THE QUOTES BELOW 👇
-        const googleAppUrl = "https://script.google.com/macros/s/AKfycbzzA-TSVGs7304QvmpyWPmUkD5Cqk-WRSHHz7n-dlp5dLE70biye2NWMVkSWtggTfXgaA/exec";
-
-        // Package the dataset up safely as text/plain to prevent CORS blocks
-        fetch(googleAppUrl, {
-            method: "POST",
-            mode: "no-cors", // Bypasses browser CORS policy restrictions
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify({ email: emailValue })
-        })
-        .then(() => {
-            // Displays success message on your landing page
-            statusMsg.textContent = `Thank you! ${emailValue} has been saved to our spreadsheet.`;
-            statusMsg.style.color = "#28a745";
-            subscribeForm.reset(); // Clears out your form field text box
-        })
-        .catch(err => {
-            console.error("Submission error:", err);
-            statusMsg.textContent = "Oops! Something went wrong. Please try again.";
-            statusMsg.style.color = "#dc3545";
-        });
+// Close mobile navigation menu layout on clicking any link items
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        hamburgerBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
     });
+});
 
-    // --- HAMBURGER INTERACTION ---
-    hamburger.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
+// Tab Panel Controller System
+function switchTab(event, tabId) {
+    // Remove active status from all current tab buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
     });
-
-    document.querySelectorAll(".nav-item").forEach(link => {
-        link.addEventListener("click", () => {
-            navMenu.classList.remove("active");
-        });
+    
+    // Hide all panel element variants
+    document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.classList.remove('active');
     });
+    
+    // Assign active statuses to target objects
+    event.currentTarget.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+}
 
-    // --- MODAL POPUP INTERACTION ---
-    appointmentBtn.addEventListener("click", () => {
-        modal.style.display = "flex";
-    });
+// Backend Connection: Form Handling to Google Apps Script Macro API Endpoint
+const emailForm = document.getElementById('emailCaptureForm');
+const feedbackMsg = document.getElementById('formFeedback');
 
-    closeModal.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
-
-    window.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            modal.style.display = "none";
-        }
+emailForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const emailValue = document.getElementById('userEmail').value;
+    feedbackMsg.style.color = '#ffb703';
+    feedbackMsg.textContent = 'Submitting email...';
+    
+    // REPL_WITH_APPS_SCRIPT_WEB_APP_URL is a placeholder for your actual Google Web App deployment link
+    const scriptURL = 'REPL_WITH_APPS_SCRIPT_WEB_APP_URL';
+    
+    fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors', // Essential option rule setting for direct cross-domain Google Apps Script POST validation requests
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({ 'email': emailValue })
+    })
+    .then(() => {
+        feedbackMsg.style.color = '#70e000';
+        feedbackMsg.textContent = 'Success! Your space transformation journey begins now.';
+        emailForm.reset();
+    })
+    .catch(error => {
+        console.error('Error!', error.message);
+        feedbackMsg.style.color = '#ff4d4d';
+        feedbackMsg.textContent = 'Submission error. Please verify connections and try again.';
     });
 });
