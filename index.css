@@ -1,3 +1,4 @@
+@import url('https://googleapis.com');
 /* ==========================================
    1. GLOBAL PAGE SETUP
    ========================================== */
@@ -9,11 +10,12 @@
 
 html, body {
   height: 100%;
-  font-family: sans-serif;
+  font-family: 'Montserrat', sans-serif; /* Replaced default fallback with Montserrat */
   background-color: #83A67C; 
   color: white;
-  overflow-x: hidden; /* Prevents unwanted horizontal mobile page shifting */
+  overflow-x: hidden;
 }
+
 
 html {
   scroll-behavior: smooth; 
