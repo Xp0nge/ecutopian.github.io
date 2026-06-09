@@ -274,56 +274,97 @@ html {
    3. HERO FRAME SECTION TEXT OVERLAY & LAYOUT EFFECTS
    ========================================== */
 .hero-bg-container {
-  min-height: 100vh; /* Takes up the complete initial browser view depth */
+  min-height: 100vh;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Horizontally centers your overlay text container box */
-  align-items: center;     /* Vertically centers your overlay text container box */
-  text-align: center;
-  padding: 20px;
   
-  /* Large Fixed Parallax Wallpaper Configuration */
+  /* Forces strict top-to-bottom centering on mobile viewports */
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;     
+  text-align: center;
+  padding: 120px 20px 40px 20px; /* Generous top padding for the fixed navbar */
+  
   background-image: url('public/ecu-logo.png');
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: min(550px, 80vw); /* Responsive image scaling barrier boundaries */
-  background-attachment: fixed;       /* Graphic stays frozen while page frames slide up */
+  background-size: min(550px, 80vw); 
+  background-attachment: fixed;       
 }
 
 .hero-text-overlay {
-  animation: fadeInUp 1.2s ease-out; /* Smooth slide fade reveal transition on load */
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Improves visual reading contrast over artwork */
+  animation: fadeInUp 1.2s ease-out;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 10px;
 }
 
+/* MOBILE DEFAULT STYLES (Keeps text legible on phones) */
 .hero-title {
-  /* Automatically computes text scale values smoothly between 40px and 75px */
-  font-size: clamp(40px, 8vw, 75px); 
-  font-weight: bold;
-  letter-spacing: 4px;
-  color: #3b5237; /* Dark branding leaf green color */
+  /* Lowered minimum size from 50px to 32px to fit inside mobile width margins */
+  font-size: clamp(32px, 8vw, 95px); 
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #1a2e16; 
   margin-bottom: 5px;
+
+  /* Replaced colliding stroke borders with a clean, high-contrast drop glow shadow */
+  text-shadow: 
+    -1.5px -1.5px 0 #fff,  
+     1.5px -1.5px 0 #fff,
+    -1.5px  1.5px 0 #fff,
+     1.5px  1.5px 0 #fff,
+     0px 4px 10px rgba(0,0,0,0.3);
 }
 
 .hero-subtitle {
-  font-size: clamp(16px, 3vw, 26px);
-  font-weight: 500;
-  letter-spacing: 1px;
-  color: #4b6446;
-  opacity: 0.95;
+  /* Lowered minimum size to allow flexible wrapping on small devices */
+  font-size: clamp(12px, 3vw, 28px); 
+  font-weight: 600;
+  color: #243d1f;
+  
+  /* Reduced mobile letter spacing to stop text from shifting rightward */
+  letter-spacing: 4px; 
+  text-transform: uppercase;
+
+  /* Matches the crisp white text shadow treatment */
+  text-shadow: 
+    -1px -1px 0 #fff,  
+     1px -1px 0 #fff,
+    -1px  1px 0 #fff,
+     1px  1px 0 #fff;
 }
 
-/* Smooth Entrance Fade Keyframe Triggers */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
+/* Base style fix to guarantee content frames center perfectly */
+.content-frame {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  padding: 30px 20px;
+  width: 90%;
+  max-width: 1100px;
+  margin: 40px auto; /* "auto" horizontally centers the frames within the page space */
+  text-align: center;
+  scroll-margin-top: 90px;
+}
+
+/* ==========================================
+   4. DESKTOP VIEW SCREEN LAYOUT OVERRIDES (Restores the widescreen look)
+   ========================================== */
+@media (min-width: 768px) {
+  /* ... keep your existing .navbar and .nav-links rules inside here ... */
+
+  /* Restores your custom wide desktop text lengths */
+  .hero-title {
+    letter-spacing: 4px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .hero-subtitle {
+    letter-spacing: 11.5px; /* Restores the exact width match for desktop screens */
   }
 }
+
 /* ==========================================
    2. NAVBAR & REWRITE WITH MOBILE HAMBURGER MENU
    ========================================== */
