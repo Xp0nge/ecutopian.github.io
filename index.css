@@ -1,4 +1,5 @@
 @import url('https://googleapis.com');
+
 /* ==========================================
    1. GLOBAL PAGE SETUP
    ========================================== */
@@ -10,12 +11,11 @@
 
 html, body {
   height: 100%;
-  font-family: 'Montserrat', sans-serif; /* Replaced default fallback with Montserrat */
+  font-family: 'Montserrat', sans-serif; 
   background-color: #83A67C; 
   color: white;
   overflow-x: hidden;
 }
-
 
 html {
   scroll-behavior: smooth; 
@@ -32,7 +32,7 @@ html {
   z-index: 2000;
   padding: 15px 25px;
   display: flex;
-  justify-content: flex-end; /* Places hamburger on top-right */
+  justify-content: flex-end; 
   align-items: center;
   background-color: rgba(255, 255, 255, 0.15); 
   backdrop-filter: blur(15px); 
@@ -103,37 +103,46 @@ html {
   text-align: center;
   padding: 140px 20px 60px 20px; 
   
+  /* Restores your original, reliable background placement settings */
   background-image: url('public/ecu-logo.png');
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: min(450px, 75vw); /* Downsized slightly to fit well behind mobile frames */
+  background-size: min(450px, 75vw); 
   background-attachment: fixed;       
+  position: relative;
+  z-index: 1;
 }
 
 .hero-text-overlay {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto 40px auto; /* Centers text block horizontally */
+  margin: 0 auto 40px auto; 
   padding: 0 10px;
 }
 
-/* Fluid responsive text configurations */
+/* ==========================================
+   3. HERO BANNER AND TEXT OVERLAYS (Updated for Mobile)
+   ========================================== */
 .hero-title {
   font-size: clamp(34px, 10vw, 85px); 
   font-weight: 800;
   letter-spacing: 2px;
   
-  /* FORCE COLOR FILL: This prevents transparency or white backgrounds inside the letters */
+  /* 1. RESTORE EXPLICIT FILL COLOR instead of transparent text-fill */
   color: #233a1e !important; 
-  -webkit-text-fill-color: #233a1e !important; 
-  
   margin-bottom: 5px;
   word-wrap: break-word;
 
-  /* Crisp 2px solid white outline trace around the solid dark green letters */
-  -webkit-text-stroke: 2px #ffffff !important;
-  
-  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2));
+  /* 2. REMOVE THE TEXT-STROKE PROPERTY TO CLEAN UP MOBILE RENDERING GLITCHES */
+  -webkit-text-stroke: unset !important;
+
+  /* 3. SIMULATE A CRISP 2PX WHITE BORDER THAT FLOATS OUTWARD */
+  text-shadow: 
+    -2px -2px 0 #ffffff,  
+     2px -2px 0 #ffffff,
+    -2px  2px 0 #ffffff,
+     2px  2px 0 #ffffff,
+     0px  4px 8px rgba(0, 0, 0, 0.2); /* Keeps your original smooth drop shadow drop */
 }
 
 .hero-subtitle {
@@ -141,16 +150,20 @@ html {
   font-weight: 600;
   letter-spacing: 4px; 
   
-  /* FORCE COLOR FILL */
+  /* RESTORE EXPLICIT FILL COLOR */
   color: #243d1f !important;
-  -webkit-text-fill-color: #243d1f !important;
-  
   text-transform: uppercase;
 
-  /* Crisp 1px solid white outline trace */
-  -webkit-text-stroke: 1px #ffffff !important;
-}
+  /* REMOVE THE TEXT-STROKE PROPERTY */
+  -webkit-text-stroke: unset !important;
 
+  /* SIMULATE A CRISP 1PX WHITE BORDER THAT FLOATS OUTWARD */
+  text-shadow: 
+    -1px -1px 0 #ffffff,  
+     1px -1px 0 #ffffff,
+    -1px  1px 0 #ffffff,
+     1px  1px 0 #ffffff;
+}
 
 
 /* ==========================================
@@ -163,9 +176,9 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 12px;
   padding: 30px 20px;
-  width: 90%; /* Forces standard equal gutters on mobile widths */
+  width: 90%; 
   max-width: 800px;
-  margin: 0 auto 60px auto; /* The auto assignment handles horizontal dead-centering */
+  margin: 0 auto 60px auto; 
   text-align: center;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   scroll-margin-top: 100px;
@@ -306,5 +319,226 @@ html {
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
+  }
+}
+/* ==========================================
+   7. INTERACTIVE BEFORE/AFTER SLIDER STYLES
+   ========================================== */
+.comparison-slider {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 400px; /* Adjust wrapper display heights here as needed */
+  margin: 30px auto 10px auto;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  user-select: none;
+}
+
+/* Force both images to absolute fill the shared canvas box dimensions */
+.slider-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* The real render sits as the passive backdrop base */
+.real-view {
+  display: block;
+}
+
+/* The line container clips the top layer based on width percentage */
+.resize-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%; /* Initialized starting snapshot division split */
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Forces line width tracking to retain absolute parent metrics without squeezing */
+.resize-container .slider-image {
+  width: 900px; /* Must match the max-width metric of your slider wrapper bounding box */
+  max-width: none;
+}
+
+/* ==========================================
+   7. INTERACTIVE BEFORE/AFTER SLIDER STYLES
+   ========================================== */
+.slider-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  opacity: 0;
+  cursor: ew-resize;
+  z-index: 10;
+
+  /* ADD THIS EXACT LINE FOR IPAD/IOS SAFARI COMPATIBILITY */
+  touch-action: none; /* Stops iOS from treating your swipe as a page scroll gesture */
+}
+
+
+/* The structural vertical partition bar indicator */
+.slider-divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 3px;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Make sure the component container shrinks proportionally on small smartphone displays */
+@media (max-width: 768px) {
+  .comparison-slider {
+    height: 250px;
+  }
+}
+/* ==========================================
+   8. GLASSMORPHIC INLINE CONTACT FORM
+   ========================================== */
+/* Align section title to the left to match reference image */
+.contact-header-title {
+  text-align: left !important;
+  font-size: 24px;
+  margin-bottom: 25px;
+  color: #e2f0d9;
+}
+
+.custom-contact-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Row wrapper forcing label and input field on the same line */
+.custom-form-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+}
+
+/* Forces top alignment specifically for the tall message row */
+.custom-form-row.message-row {
+  align-items: flex-start;
+}
+
+/* Set fixed width for labels to guarantee all input boxes align perfectly */
+.custom-form-label {
+  width: 110px;
+  min-width: 110px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e2f0d9;
+}
+
+.custom-form-field-wrapper {
+  flex: 1;
+  width: 100%;
+}
+
+/* Grid splitting Surname and First Name equally */
+.custom-form-inputs-split {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  width: 100%;
+}
+
+/* Rounded, glassmorphic fields matching theme */
+.custom-contact-form input,
+.custom-contact-form textarea {
+  width: 100%;
+  padding: 10px 18px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px; /* Fully rounded pill fields to match reference layout */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* Square out textarea corners slightly more than inputs for text readability */
+.custom-contact-form textarea {
+  border-radius: 12px;
+}
+
+.custom-contact-form input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.custom-contact-form input:focus,
+.custom-contact-form textarea:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #e2f0d9;
+  box-shadow: 0 0 10px rgba(226, 240, 217, 0.2);
+}
+
+/* Align button to the bottom-right corner */
+.custom-form-action-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+/* Theme-matched submit button */
+.custom-submit-btn {
+  background-color: #233a1e; /* Matches your core dark green theme color */
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 35px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.custom-submit-btn:hover {
+  background-color: #2e4d27;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.custom-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive flow for smaller mobile devices */
+@media (max-width: 550px) {
+  .custom-form-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .custom-form-label {
+    width: 100%;
+    min-width: unset;
+  }
+  .custom-form-inputs-split {
+    flex-direction: column;
+    gap: 10px;
   }
 }
