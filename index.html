@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
+  <!-- THIS PLACES YOUR FIXED BACKGROUND LOGO SAFELY -->
+
 <!-- NAVIGATION BAR (Updated with Mobile Toggle) -->
 <nav class="navbar">
   <!-- The clickable hamburger trigger button -->
@@ -46,11 +48,28 @@
   <!-- This ID ensures clicking 'Home' jumps right back to the top -->
   <div id="home" class="hero-bg-container">
     
-    <!-- FRAME 1: OUR PROJECT & SERVICES -->
-    <section id="projects" class="content-frame">
-      <h2>Our Project & Services</h2>
-      <p>This is a placeholder for your team chart layout, gallery sliders, or architecture drafts. More content will expand the scrolling height of this card framework.</p>
-    </section>
+    <div class="content-frame" id="projects">
+  <h2>Our Projects & Services</h2>
+  <p>Slide to compare our detailed architectural schematics with our completed luxury resort builds.</p>
+
+  <!-- THE INTERACTIVE COMPARISON SLIDER CONTAINER -->
+  <div class="comparison-slider">
+    <!-- Background Layer: The Finalized Real Render Image -->
+    <img src="public/Real_Image.png" alt="Real Render" class="slider-image real-view">
+    
+    <!-- Resizable Overlay Layer: The Line Sketch Image -->
+    <div class="resize-container">
+      <img src="public/Line_Image.png" alt="Line Schematic" class="slider-image line-view">
+    </div>
+    
+    <!-- Drag Control Slider Bar Handle -->
+    <input type="range" min="0" max="100" value="50" class="slider-bar" id="comparison-range">
+    
+    <!-- Optional Visual Handle Line Splitter Indicator -->
+    <div class="slider-divider"></div>
+  </div>
+</div>
+
 
     <!-- FRAME 2: ABOUT US -->
 <section id="about" class="content-frame">
@@ -121,14 +140,87 @@
 
     </section>
 
-    <!-- FRAME 3: CONTACT US -->
-    <section id="contact" class="content-frame">
-      <h2>Contact Us</h2>
-      <p>This is a placeholder for maps location pins, messaging inputs, or business contact information boxes.</p>
-    </section>
+    <!-- ==========================================
+     CUSTOM CONTACT US CARD CONTAINER
+     ========================================== -->
+<div class="content-frame" id="contact">
+  <h2 class="contact-header-title">Contact Us</h2>
 
-  </div>
+  <form class="custom-contact-form" action="#" method="POST">
+    
+    <!-- Row 1: Name Field with Split Surname & First Name -->
+    <div class="custom-form-row">
+      <label class="custom-form-label">Name:</label>
+      <div class="custom-form-inputs-split">
+        <input type="text" name="surname" placeholder="Surname" required>
+        <input type="text" name="firstname" placeholder="First Name" required>
+      </div>
+    </div>
+    
+    <!-- Row 2: Email -->
+    <div class="custom-form-row">
+      <label class="custom-form-label" for="client-email">Email:</label>
+      <div class="custom-form-field-wrapper">
+        <input type="email" id="client-email" name="email" required>
+      </div>
+    </div>
+
+    <!-- Row 3: Contact Number -->
+    <div class="custom-form-row">
+      <label class="custom-form-label" for="client-phone">Contact #:</label>
+      <div class="custom-form-field-wrapper">
+        <input type="tel" id="client-phone" name="phone" required>
+      </div>
+    </div>
+    
+    <!-- Row 4: Message Block -->
+    <div class="custom-form-row message-row">
+      <label class="custom-form-label" for="client-message">Message:</label>
+      <div class="custom-form-field-wrapper">
+        <textarea id="client-message" name="message" rows="6" required></textarea>
+      </div>
+    </div>
+    
+    <!-- Submission Control Action -->
+    <div class="custom-form-action-wrapper">
+      <button type="submit" class="custom-submit-btn">Submit</button>
+    </div>
+  </form>
+</div>
+
 
   <script src="index.js"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const rangeSlider = document.getElementById("comparison-range");
+    const resizeBox = document.querySelector(".resize-container");
+    const sliderLine = document.querySelector(".slider-divider");
+    const sliderWrapper = document.querySelector(".comparison-slider");
+    const lineImage = document.querySelector(".line-view");
+
+    function updateSliderSplit() {
+      const sliderVal = rangeSlider.value;
+      
+      // 1. Dynamic overlay box dimensions matching progress metrics 
+      resizeBox.style.width = `${sliderVal}%`;
+      sliderLine.style.left = `${sliderVal}%`;
+    }
+
+    function syncImageWidth() {
+      // 2. Keeps internal layout calculations pixel perfect across variable mobile screens
+      const containerWidth = sliderWrapper.offsetWidth;
+      lineImage.style.width = `${containerWidth}px`;
+    }
+
+    // Bind interaction event streams
+    rangeSlider.addEventListener("input", updateSliderSplit);
+    window.addEventListener("resize", syncImageWidth);
+    
+    // Fire initials on deployment launch loading
+    syncImageWidth();
+    updateSliderSplit();
+  });
+</script>
+
 </body>
 </html>
