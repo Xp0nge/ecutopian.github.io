@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+      <!-- REPLACE LINES 5 AND 6 INSIDE YOUR HEAD TAG WITH THESE COMPLETELY UNTRUNCATED LINKS -->
+  <link rel="stylesheet" href="https://cloudflare.com">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/splidejs/4.1.4/js/splide.min.js"></script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ecutopian Design and Consultancy</title>
   <link rel="stylesheet" href="index.css">
+
 </head>
 <body>
-  <!-- THIS PLACES YOUR FIXED BACKGROUND LOGO SAFELY -->
 
 <!-- NAVIGATION BAR (Updated with Mobile Toggle) -->
 <nav class="navbar">
@@ -48,25 +52,40 @@
   <!-- This ID ensures clicking 'Home' jumps right back to the top -->
   <div id="home" class="hero-bg-container">
     
-    <div class="content-frame" id="projects">
+    <!-- ==========================================
+     OUR PROJECTS & SERVICES FRAME (Corrected Paths)
+     ========================================== -->
+<div class="content-frame" id="projects">
   <h2>Our Projects & Services</h2>
   <p>Slide to compare our detailed architectural schematics with our completed luxury resort builds.</p>
 
-  <!-- THE INTERACTIVE COMPARISON SLIDER CONTAINER -->
+  <!-- 1. INTERACTIVE COMPARISON SLIDER (Points to public/Comparison/) -->
   <div class="comparison-slider">
-    <!-- Background Layer: The Finalized Real Render Image -->
-    <img src="public/Real_Image.png" alt="Real Render" class="slider-image real-view">
-    
-    <!-- Resizable Overlay Layer: The Line Sketch Image -->
+    <img src="public/Comparison/Real_Image.png" alt="Real Render" class="slider-image real-view">
     <div class="resize-container">
-      <img src="public/Line_Image.png" alt="Line Schematic" class="slider-image line-view">
+      <img src="public/Comparison/Line_Image.png" alt="Line Schematic" class="slider-image line-view">
     </div>
-    
-    <!-- Drag Control Slider Bar Handle -->
     <input type="range" min="0" max="100" value="50" class="slider-bar" id="comparison-range">
-    
-    <!-- Optional Visual Handle Line Splitter Indicator -->
     <div class="slider-divider"></div>
+  </div>
+
+  <!-- Divider gap between components -->
+  <div class="carousel-section-divider"></div>
+
+  <!-- 2. GALLERY CAROUSEL (Points to public/Sliders/) -->
+  <div class="splide" aria-label="Our Projects Gallery Carousel">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <li class="splide__slide"><img src="public/Sliders/Slide1.jpg" alt="Project Layout 1"></li>
+        <li class="splide__slide"><img src="public/Sliders/Slide2.jpg" alt="Project Layout 2"></li>
+        <li class="splide__slide"><img src="public/Sliders/Slide3.jpg" alt="Project Layout 3"></li>
+        <li class="splide__slide"><img src="public/Sliders/Slide4.jpg" alt="Project Layout 4"></li>
+        <li class="splide__slide"><img src="public/Sliders/Slide5.jpg" alt="Project Layout 5"></li>
+        <li class="splide__slide"><img src="public/Sliders/Slide6.jpg" alt="Project Layout 6"></li>
+        <li class="splide__slide"><img src="public/Sliders/Slide7.jpg" alt="Project Layout 7"></li>
+        <li class="splide__slide"><img src="public/Sliders/Slide8.jpg" alt="Project Layout 8"></li>
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -143,50 +162,61 @@
     <!-- ==========================================
      CUSTOM CONTACT US CARD CONTAINER
      ========================================== -->
+     <form class="custom-contact-form" id="contact-form"> <!-- ADDED: an 'id' attribute to track it via JS -->
+    
+    <!-- ADD THIS HIDDEN ID INPUT AT THE TOP OF YOUR FORM -->
+    <input type="hidden" id="client-idNumber" name="idNumber">
+
+    <!-- 1. THIS IS YOUR GLASS CONTAINER WRAPPER (Ensure this line matches exactly) -->
 <div class="content-frame" id="contact">
-  <h2 class="contact-header-title">Contact Us</h2>
+    <h2 class="contact-header-title">Contact Us</h2>
 
-  <form class="custom-contact-form" action="#" method="POST">
-    
-    <!-- Row 1: Name Field with Split Surname & First Name -->
-    <div class="custom-form-row">
-      <label class="custom-form-label">Name:</label>
-      <div class="custom-form-inputs-split">
-        <input type="text" name="surname" placeholder="Surname" required>
-        <input type="text" name="firstname" placeholder="First Name" required>
-      </div>
-    </div>
-    
-    <!-- Row 2: Email -->
-    <div class="custom-form-row">
-      <label class="custom-form-label" for="client-email">Email:</label>
-      <div class="custom-form-field-wrapper">
-        <input type="email" id="client-email" name="email" required>
-      </div>
-    </div>
+    <!-- 2. THE SINGLE FORM TAG OPENER WITH THE CORRECT LINKED SCRIPT ID -->
+    <form class="custom-contact-form" id="contact-form">
+        
+        <!-- Hidden database tracking identifier field -->
+        <input type="hidden" id="client-idNumber" name="idNumber">
 
-    <!-- Row 3: Contact Number -->
-    <div class="custom-form-row">
-      <label class="custom-form-label" for="client-phone">Contact #:</label>
-      <div class="custom-form-field-wrapper">
-        <input type="tel" id="client-phone" name="phone" required>
-      </div>
-    </div>
-    
-    <!-- Row 4: Message Block -->
-    <div class="custom-form-row message-row">
-      <label class="custom-form-label" for="client-message">Message:</label>
-      <div class="custom-form-field-wrapper">
-        <textarea id="client-message" name="message" rows="6" required></textarea>
-      </div>
-    </div>
-    
-    <!-- Submission Control Action -->
-    <div class="custom-form-action-wrapper">
-      <button type="submit" class="custom-submit-btn">Submit</button>
-    </div>
-  </form>
-</div>
+        <!-- Row 1: Name Fields (Surname + First Name) -->
+        <div class="custom-form-row">
+            <label class="custom-form-label">Name:</label>
+            <div class="custom-form-inputs-split">
+                <input type="text" id="client-surname" name="surname" placeholder="Surname" maxlength="50" required>
+                <input type="text" id="client-firstname" name="firstname" placeholder="First Name" maxlength="50" required>
+            </div>
+        </div>
+
+        <!-- Row 2: Email Field -->
+        <div class="custom-form-row">
+            <label class="custom-form-label" for="client-email">Email:</label>
+            <div class="custom-form-field-wrapper">
+                <input type="email" id="client-email" name="email" placeholder="Email" maxlength="50" required>
+            </div>
+        </div>
+
+        <!-- Row 3: Contact Number Field -->
+        <div class="custom-form-row">
+            <label class="custom-form-label" for="client-phone">Contact #:</label>
+            <div class="custom-form-field-wrapper">
+                <input type="tel" id="client-phone" name="phone" placeholder="Contact Number" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)" required>
+            </div>
+        </div>
+
+        <!-- Row 4: Message Textarea Box -->
+        <div class="custom-form-row message-row">
+            <label class="custom-form-label" for="client-message">Message:</label>
+            <div class="custom-form-field-wrapper">
+                <textarea id="client-message" name="message" placeholder="Max 1500 characters" rows="6" maxlength="1500" required></textarea>
+            </div>
+        </div>
+
+        <!-- Submit Button Element Grid -->
+        <div class="custom-form-action-wrapper">
+            <button type="submit" class="custom-submit-btn">Submit</button>
+        </div>
+
+    </form> <!-- Closes your form element cleanly -->
+</div> <!-- 3. CRITICAL: This closing div element hooks back onto the content-frame at the top! -->
 
 
   <script src="index.js"></script>
@@ -221,6 +251,9 @@
     updateSliderSplit();
   });
 </script>
+  <!-- Ensure this line sits right above your closing </body>
+  <script src="script.js"></script>
+</body>
 
 </body>
 </html>
