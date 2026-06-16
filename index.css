@@ -10,58 +10,59 @@
 }
 
 html, body {
-  height: 100%;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch; /* Enables momentum & smooth transitions on iOS/iPad */
+}
+
+html {
+  height: -webkit-fill-available; /* Fixes browser height calculation bugs on mobile */
+}
+
+body {
+  min-height: 100vh; /* Replaces height: 100% so browsers detect the full scrollbar */
   font-family: 'Montserrat', sans-serif; 
   background-color: #83A67C; 
   color: white;
   overflow-x: hidden;
-   scroll-behavior: smooth !important; /* Forces all viewports to animate transitions */
-}
-
-html {
-  scroll-behavior: smooth; 
+  overflow-y: auto;  /* Explicitly tells your phone exactly where to map the scroll channel */
 }
 
 /* ==========================================
    2. FIXED NAVIGATION BAR & DROPDOWN MENU
    ========================================== */
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 2000;
-  padding: 15px 25px;
-  display: flex;
-  justify-content: flex-end; 
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.15); 
-  backdrop-filter: blur(15px); 
-  -webkit-backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: fixed;
+    /* Centering parameters for a floating fixed block */
+    top: 20px;                     /* Moves it down from the very top of the window */
+    left: 50%;
+    transform: translateX(-50%);   /* Perfectly centers it horizontally */
+    
+    /* Box sizing boundaries */
+    width: 70%;                    /* Adjust this percentage if you want it wider or narrower */
+    max-width: 700px;             /* Keeps it balanced on ultra-wide desktop monitors */
+    height: 40px;
+    
+    /* Layout positioning alignment */
+    display: flex;
+    justify-content: center;       /* Centers your navigation link texts inside the container */
+    align-items: center;
+    z-index: 1000;
+    
+    /* Glassmorphism Effect Matching Your Other Frames */
+    background: rgba(255, 255, 255, 0.15); /* Semi-transparent white backing */
+    backdrop-filter: blur(15px);           /* Smooth hardware-accelerated background frost */
+    -webkit-backdrop-filter: blur(15px);   /* Safari stability patch */
+    
+    /* Rounded Rectangular Edges and Depth Contours */
+    border-radius: 15px;                   /* Smoothly rounded corners */
+    border: 1px solid rgba(255, 255, 255, 0.25); /* Subtle glass edge highlight line */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);  /* Matching shadow matrix depth profile */
 }
 
-.menu-toggle {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 26px;
-  height: 18px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
 
-.menu-toggle .bar {
-  width: 100%;
-  height: 3px;
-  background-color: #ffffff; 
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
+/* Updated for smooth dropping animation transitions */
 .nav-links {
-  display: none; 
+  display: flex;                 /* Keeps flex display active so it can animate */
   flex-direction: column;
   align-items: center;
   gap: 22px;
@@ -70,12 +71,21 @@ html {
   left: 0;
   width: 100%;
   background-color: rgba(43, 62, 40, 0.95); 
-  padding: 25px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  
+  /* Hides the drawer smoothly by default */
+  max-height: 0;                 
+  opacity: 0;
+  overflow: hidden;              /* Prevents text from spilling out while closed */
+  padding: 0;                    /* Resets padding so it can collapse to 0 height */
+  transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, padding 0.4s ease-in-out;
 }
 
+/* Active state triggered by your JavaScript click */
 .nav-links.active {
-  display: flex;
+  max-height: 300px;             /* Gives it enough room to fully unfold its links */
+  opacity: 1;                    /* Fades the links cleanly back into view */
+  padding: 25px 0;               /* Smoothly expands padding back out */
 }
 
 .nav-links a {
@@ -91,35 +101,63 @@ html {
   color: #e2f0d9;
 }
 
+
 /* ==========================================
    3. HERO BANNER AND TEXT OVERLAYS
    ========================================== */
 .hero-bg-container {
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center;     
-  text-align: center;
-  padding: 140px 20px 60px 20px; 
-  
-  /* Restores your original, reliable background placement settings */
-  background-image: url('public/ecu-logo.png');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: min(450px, 75vw); 
-  background-attachment: fixed;       
-  position: relative;
-  z-index: 1;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center;
+    padding: 140px 20px 60px 20px; 
+    
+    /* REMOVED: Background images are moved to the pseudo-element below */
+    position: relative;
+    z-index: 1;
+    overflow: hidden; /* Stops any entry animations from clipping lower page content */
+}
+
+/* NEW STEP: Create an isolated background layer that animates independently */
+.hero-bg-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('public/ecu-logo.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed; 
+    z-index: -2; 
+    
+    /* Smooth 0.5-second buffer when properties alter dynamically later */
+    transition: filter 0.5s ease, opacity 0.5s ease;
+
+    /* Runs your newly updated full-color scale keyframe */
+    animation: logoScaleUp 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .hero-text-overlay {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto 40px auto; 
-  padding: 0 10px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 40px auto; 
+    padding: 0 10px;
+    position: relative;
+    z-index: 1;
+
+    /* 1. CRITICAL FIX: Forces the text to stay hidden when the page first loads */
+    opacity: 0; 
+    
+    /* 2. CRITICAL FIX: 'forwards' forces the text to keep its final animated state, */
+    /* and 'animation-fill-mode' handles the initial delay state perfectly. */
+    animation: fadeInUp 1.2s ease-out 0.5s forwards;
 }
+
 
 /* ==========================================
    3. HERO BANNER AND TEXT OVERLAYS (Updated for Mobile)
@@ -432,6 +470,10 @@ html {
   align-items: center;
   width: 100%;
   gap: 15px;
+
+  /* ADD THIS LINE: This drops each text box down to create beautiful spacing */
+    margin-bottom: 22px; 
+    
 }
 
 /* Forces top alignment specifically for the tall message row */
@@ -543,3 +585,231 @@ html {
     gap: 10px;
   }
 }
+@media (min-width: 768px) {
+  /* ... your other navbar media properties ... */
+  
+  .nav-links {
+    display: flex;
+    position: static; 
+    flex-direction: row;
+    background-color: transparent; 
+    gap: 40px;
+    width: auto;
+    border-bottom: none;
+    
+    /* Forces desktop to ignore mobile collapse constraints */
+    max-height: none !important;
+    opacity: 1 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+}
+/* ==========================================
+   9. GALLERY CAROUSEL DESIGN THEME OVERRIDES
+   ========================================== */
+.carousel-section-divider {
+  margin: 40px 0 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  width: 100%;
+}
+
+.splide {
+  position: relative !important;
+  width: 100%;
+  max-width: 900px; 
+  height: 420px;    /* 1. LOCK CONTAINER HEIGHT: Stops vertical pixel shifts during transitions */
+  margin: 0 auto;   
+  padding: 10px 0;
+  overflow: hidden !important; 
+}
+
+.splide__track {
+  width: 100%;
+  height: 400px;    /* Matches image frame heights precisely */
+  overflow: hidden !important;
+}
+
+.splide__list {
+  display: flex !important;
+  flex-direction: row !important;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.splide__slide {
+  flex: 0 0 100% !important; 
+  width: 100% !important;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.splide__slide img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain; 
+  background-color: rgba(255, 255, 255, 0.05); 
+}
+
+/* Fixes arrow buttons layout, positioning, and drops the jumpy transform property */
+.splide__arrows {
+  display: flex;
+}
+
+.splide__arrow {
+  position: absolute;
+  /* 2. SOLID ABSOLUTE POSITIONING: Replaces translateY(-50%) to stabilize alignment */
+  top: 190px !important; /* Locks them right in the middle point of your 400px frames */
+  z-index: 10;
+  background: rgba(35, 58, 30, 0.8) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.splide__arrow svg {
+  fill: #ffffff !important;
+  width: 16px;
+  height: 16px;
+  transition: none !important; /* Stops the browser engine from animating icons during autoplay transitions */
+}
+
+/* ==========================================
+   FIX CAROUSEL ARROWS PLACEMENT & NATIVE DIRECTION
+   ========================================== */
+
+/* 1. Reset all manual CSS rotations so icons point in their true native directions */
+.splide__arrow svg {
+  fill: #ffffff !important;
+  width: 16px;
+  height: 16px;
+  transform: none !important; /* Clears previous rotations */
+  transition: none !important;
+}
+
+/* 2. Position the TRUE Next slide action button on the RIGHT side */
+.splide__arrow--next { 
+  right: 15px !important;  
+  left: auto !important;
+}
+
+/* 3. Position the TRUE Previous slide action button on the LEFT side */
+.splide__arrow--prev { 
+  left: 15px !important;   
+  right: auto !important;
+}
+
+/* 4. Flip ONLY the left arrow button icon box 180 degrees so it naturally points to the left */
+.splide__arrow--prev svg {
+  transform: scaleX(-1) !important; /* Flips the arrow horizontally to point left */
+}
+
+
+/* Adjust layout scaling safely for mobile devices */
+@media (max-width: 768px) {
+  .splide {
+    max-width: 100%;
+    height: 270px; /* Lock height on mobile screen viewports */
+  }
+  .splide__track {
+    height: 240px;
+  }
+  .splide__slide img {
+    height: 240px; 
+  }
+  .splide__arrow {
+    top: 110px !important; /* Lock absolute height on mobile screens */
+    width: 34px !important;
+    height: 34px !important;
+  }
+}
+
+/* ==========================================
+   10. CAROUSEL PAGINATION DOTS (Forced Horizontal Row)
+   ========================================== */
+/* Force the container to behave as a clean, single horizontal line row */
+.splide__pagination {
+  position: absolute !important;
+  bottom: -20px !important; /* Pushes the dots below the bottom edge of the image */
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  
+  /* CRITICAL FORCING: Swaps vertical stacking to a horizontal layout row */
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  
+  gap: 10px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  list-style: none !important;
+  z-index: 20 !important;
+}
+
+/* Ensure each individual list item stays flat on the same line */
+.splide__pagination li {
+  display: inline-flex !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Individual indicator pips styling */
+.splide__pagination__page {
+  background: rgba(35, 58, 30, 0.4) !important; /* Premium dark green tint */
+  border: none !important;
+  border-radius: 50% !important;
+  width: 10px !important;
+  height: 10px !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  display: block !important;
+}
+
+/* Enhances the active tracking indicator capsule */
+.splide__pagination__page.is-active {
+  background: #233a1e !important; /* Solid dark green matches theme headers */
+  transform: scale(1.1) !important;
+  width: 24px !important;         /* Stretches into a modern horizontal pill */
+  border-radius: 5px !important;
+}
+/* ==========================================
+ 10. ENTRY ANIMATIONS (Isolated Bugfix v1.2.3)
+ ========================================== */
+
+/* Smooth fade and slide up for text overlay */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animates ONLY the background image size inside its own layer */
+@keyframes logoScaleUp {
+    from {
+        opacity: 0;
+        background-size: 0px; /* Starts completely shrunk */
+    }
+    to {
+        opacity: 1; /* Clean background opacity baseline */
+        background-size: min(450px, 75vw); /* Settles back to exact design bounds */
+    }
+}
+
+
