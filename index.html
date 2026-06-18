@@ -9,6 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ecutopian Design and Consultancy</title>
   <link rel="stylesheet" href="index.css">
+<!-- Leaflet.js Mapping Engine (Required for Live Map Canvas) -->
+<link rel="stylesheet" href="https://unpkg.com" />
+<script src="https://unpkg.com"></script>
 
 </head>
 <body>
@@ -156,17 +159,9 @@
  <p class="location-subtitle-text">Purok-Kamansi, Brgy. Gumian, Infanta, Quezon</p>
  
  <!-- This will now load perfectly once hosted live on GitHub! -->
- <div class="map-responsive-container">
-   <iframe 
-     src="https://google.com" 
-     width="100%" 
-     height="400" 
-     style="border:0;" 
-     allowfullscreen="" 
-     loading="lazy" 
-     referrerpolicy="no-referrer-when-downgrade">
-   </iframe>
- </div>
+ <!-- Map Target Element Layer -->
+<div id="live-leaflet-map" class="map-responsive-container"></div>
+
 
  <!-- Isolated Info Meta Dashboard -->
  <div class="location-meta-grid">
@@ -293,7 +288,23 @@
 </script>
   <!-- Ensure this line sits right above your closing </body>
   <script src="script.js"></script>
-</body>
+
+  <script>
+  // Initialize map canvas and set viewpoint focus to Gumian coordinates
+  const mapInstance = L.map('live-leaflet-map').setView([14.694678, 121.608871], 15);
+
+  // Load free open-source map layer tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(mapInstance);
+
+  // Drop a permanent, interactive red location marker pin on your office spot
+  L.marker([14.694678, 121.608871])
+    .addTo(mapInstance)
+    .bindPopup('<b>Ecutopian Design & Consultancy</b><br>Purok-Kamansi, Brgy. Gumian')
+    .openPopup();
+</script>
 
 </body>
+
 </html>
