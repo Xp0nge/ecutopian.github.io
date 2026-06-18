@@ -10,81 +10,69 @@
 }
 
 html, body {
-  scroll-behavior: smooth !important;
-  -webkit-overflow-scrolling: touch; /* Enables momentum & smooth transitions on iOS/iPad */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 html {
-  height: -webkit-fill-available; /* Fixes browser height calculation bugs on mobile */
+  height: -webkit-fill-available;
 }
 
 body {
-  min-height: 100vh; /* Replaces height: 100% so browsers detect the full scrollbar */
+  min-height: 100vh;
   font-family: 'Montserrat', sans-serif; 
   background-color: #83A67C; 
   color: white;
   overflow-x: hidden;
-  overflow-y: auto;  /* Explicitly tells your phone exactly where to map the scroll channel */
+  overflow-y: auto;
 }
 
 /* ==========================================
    2. FIXED NAVIGATION BAR & DROPDOWN MENU
    ========================================== */
 .navbar {
-    position: fixed;
-    /* Centering parameters for a floating fixed block */
-    top: 20px;                     /* Moves it down from the very top of the window */
-    left: 50%;
-    transform: translateX(-50%);   /* Perfectly centers it horizontally */
-    
-    /* Box sizing boundaries */
-    width: 70%;                    /* Adjust this percentage if you want it wider or narrower */
-    max-width: 700px;             /* Keeps it balanced on ultra-wide desktop monitors */
-    height: 40px;
-    
-    /* Layout positioning alignment */
-    display: flex;
-    justify-content: center;       /* Centers your navigation link texts inside the container */
-    align-items: center;
-    z-index: 1000;
-    
-    /* Glassmorphism Effect Matching Your Other Frames */
-    background: rgba(255, 255, 255, 0.15); /* Semi-transparent white backing */
-    backdrop-filter: blur(15px);           /* Smooth hardware-accelerated background frost */
-    -webkit-backdrop-filter: blur(15px);   /* Safari stability patch */
-    /* ADD THIS IMMEDIATELY BELOW THE NAVBAR BLOCK */
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  max-width: 700px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
 .menu-toggle {
-    display: none;             /* Hides the icon on desktop view screens */
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 24px;
-    height: 18px;
-    padding: 0;
-    box-sizing: border-box;
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  padding: 0;
 }
 
 .menu-toggle .bar {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: #ffffff; /* Sets the default bar asset color to clean white */
-    border-radius: 2px;
-    transition: all 0.3s ease;
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
-    /* Rounded Rectangular Edges and Depth Contours */
-    border-radius: 15px;                   /* Smoothly rounded corners */
-    border: 1px solid rgba(255, 255, 255, 0.25); /* Subtle glass edge highlight line */
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);  /* Matching shadow matrix depth profile */
-}
-
-
-/* Updated for smooth dropping animation transitions */
 .nav-links {
-  display: flex;                 /* Keeps flex display active so it can animate */
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 22px;
@@ -94,20 +82,17 @@ body {
   width: 100%;
   background-color: rgba(43, 62, 40, 0.95); 
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  
-  /* Hides the drawer smoothly by default */
-  max-height: 0;                 
+  max-height: 0; 
   opacity: 0;
-  overflow: hidden;              /* Prevents text from spilling out while closed */
-  padding: 0;                    /* Resets padding so it can collapse to 0 height */
+  overflow: hidden;
+  padding: 0;
   transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, padding 0.4s ease-in-out;
 }
 
-/* Active state triggered by your JavaScript click */
 .nav-links.active {
-  max-height: 420px;             /* Gives it enough room to fully unfold its links */
-  opacity: 1;                    /* Fades the links cleanly back into view */
-  padding: 20px 0;               /* Smoothly expands padding back out */
+  max-height: 420px;
+  opacity: 1;
+  padding: 20px 0;
 }
 
 .nav-links a {
@@ -123,109 +108,67 @@ body {
   color: #e2f0d9;
 }
 
-
 /* ==========================================
    3. HERO BANNER AND TEXT OVERLAYS
    ========================================== */
 .hero-bg-container {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    text-align: center;
-    padding: 140px 20px 60px 20px; 
-    
-    /* REMOVED: Background images are moved to the pseudo-element below */
-    position: relative;
-    z-index: 1;
-    overflow: hidden; /* Stops any entry animations from clipping lower page content */
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  text-align: center;
+  padding: 140px 20px 60px 20px; 
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
 }
 
-/* NEW STEP: Create an isolated background layer that animates independently */
 .hero-bg-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('public/ecu-logo.png');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed; 
-    z-index: -2; 
-    
-    /* Smooth 0.5-second buffer when properties alter dynamically later */
-    transition: filter 0.5s ease, opacity 0.5s ease;
-
-    /* Runs your newly updated full-color scale keyframe */
-    animation: logoScaleUp 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url('public/ecu-logo.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed; 
+  z-index: -2; 
+  transition: filter 0.5s ease, opacity 0.5s ease;
+  animation: logoScaleUp 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .hero-text-overlay {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto 40px auto; 
-    padding: 0 10px;
-    position: relative;
-    z-index: 1;
-
-    /* 1. CRITICAL FIX: Forces the text to stay hidden when the page first loads */
-    opacity: 0; 
-    
-    /* 2. CRITICAL FIX: 'forwards' forces the text to keep its final animated state, */
-    /* and 'animation-fill-mode' handles the initial delay state perfectly. */
-    animation: fadeInUp 1.2s ease-out 0.5s forwards;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 40px auto; 
+  padding: 0 10px;
+  position: relative;
+  z-index: 1;
+  opacity: 0; 
+  animation: fadeInUp 1.2s ease-out 0.5s forwards;
 }
 
-
-/* ==========================================
-   3. HERO BANNER AND TEXT OVERLAYS (Updated for Mobile)
-   ========================================== */
 .hero-title {
   font-size: clamp(34px, 10vw, 85px); 
   font-weight: 800;
   letter-spacing: 2px;
-  
-  /* 1. RESTORE EXPLICIT FILL COLOR instead of transparent text-fill */
-  color: #233a1e !important; 
+  color: #233a1e;
   margin-bottom: 5px;
   word-wrap: break-word;
-
-  /* 2. REMOVE THE TEXT-STROKE PROPERTY TO CLEAN UP MOBILE RENDERING GLITCHES */
-  -webkit-text-stroke: unset !important;
-
-  /* 3. SIMULATE A CRISP 2PX WHITE BORDER THAT FLOATS OUTWARD */
-  text-shadow: 
-    -2px -2px 0 #ffffff,  
-     2px -2px 0 #ffffff,
-    -2px  2px 0 #ffffff,
-     2px  2px 0 #ffffff,
-     0px  4px 8px rgba(0, 0, 0, 0.2); /* Keeps your original smooth drop shadow drop */
+  -webkit-text-stroke: unset;
+  text-shadow: -2px -2px 0 #ffffff, 2px -2px 0 #ffffff, -2px 2px 0 #ffffff, 2px 2px 0 #ffffff, 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .hero-subtitle {
   font-size: clamp(12px, 3.5vw, 22px); 
   font-weight: 600;
   letter-spacing: 4px; 
-  
-  /* RESTORE EXPLICIT FILL COLOR */
-  color: #243d1f !important;
+  color: #243d1f;
   text-transform: uppercase;
-
-  /* REMOVE THE TEXT-STROKE PROPERTY */
-  -webkit-text-stroke: unset !important;
-
-  /* SIMULATE A CRISP 1PX WHITE BORDER THAT FLOATS OUTWARD */
-  text-shadow: 
-    -1px -1px 0 #ffffff,  
-     1px -1px 0 #ffffff,
-    -1px  1px 0 #ffffff,
-     1px  1px 0 #ffffff;
+  -webkit-text-stroke: unset;
+  text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
 }
-
 
 /* ==========================================
    4. LAYOUT FRAME CONTAINER CARDS
@@ -258,7 +201,7 @@ body {
 }
 
 /* ==========================================
-   5. VISUAL TREE CHART STRUCTURE (Mobile Default)
+   5. VISUAL TREE CHART STRUCTURE
    ========================================== */
 .tree-chart-container {
   display: flex;
@@ -281,7 +224,7 @@ body {
   background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  padding: 20px 15px;       
+  padding: 20px 15px; 
   width: 100%;
   max-width: 220px;
   text-align: center;
@@ -289,8 +232,8 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  min-height: 160px;        
-  justify-content: center;  
+  min-height: 160px; 
+  justify-content: center; 
 }
 
 .tree-icon {
@@ -312,42 +255,599 @@ body {
 }
 
 /* ==========================================
-   6. RESPONSIVE DESKTOP OVERRIDES
+   6. INTERACTIVE BEFORE/AFTER SLIDER STYLES
    ========================================== */
+.comparison-slider {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 400px; 
+  margin: 30px auto 10px auto;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  user-select: none;
+}
+
+.slider-image {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.real-view {
+  display: block;
+}
+
+.resize-container {
+  position: absolute;
+  top: 0; left: 0;
+  width: 50%; 
+  height: 100%;
+  overflow: hidden;
+}
+
+.resize-container .slider-image {
+  width: 900px; 
+  max-width: none;
+}
+
+.slider-bar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  opacity: 0;
+  cursor: ew-resize;
+  z-index: 10;
+  touch-action: none; 
+}
+
+.slider-divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 3px;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ==========================================
+   7. GLASSMORPHIC INLINE CONTACT FORM
+   ========================================== */
+.contact-header-title {
+  text-align: left;
+  font-size: 24px;
+  margin-bottom: 25px;
+  color: #e2f0d9;
+}
+
+.custom-contact-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.custom-form-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+  margin-bottom: 22px; 
+}
+
+.custom-form-row.message-row {
+  align-items: flex-start;
+}
+
+.custom-form-label {
+  width: 110px;
+  min-width: 110px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e2f0d9;
+}
+
+.custom-form-field-wrapper {
+  flex: 1;
+  width: 100%;
+}
+
+.custom-form-inputs-split {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  width: 100%;
+}
+
+.custom-contact-form input,
+.custom-contact-form textarea {
+  width: 100%;
+  padding: 10px 18px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px; 
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.custom-contact-form textarea {
+  border-radius: 12px;
+}
+
+.custom-contact-form input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.custom-contact-form input:focus,
+.custom-contact-form textarea:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #e2f0d9;
+  box-shadow: 0 0 10px rgba(226, 240, 217, 0.2);
+}
+
+.custom-form-action-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+.custom-submit-btn {
+  background-color: #233a1e; 
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 35px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.custom-submit-btn:hover {
+  background-color: #2e4d27;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.custom-submit-btn:active {
+  transform: translateY(0);
+}
+/* ==========================================
+   8. GALLERY CAROUSEL DESIGN THEME (SPLIDE)
+   ========================================== */
+.carousel-section-divider {
+  margin: 40px 0 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  width: 100%;
+}
+
+.splide {
+  position: relative;
+  width: 100%;
+  max-width: 900px; 
+  height: 420px; 
+  margin: 0 auto; 
+  padding: 10px 0;
+  overflow: hidden; 
+}
+
+.splide__track {
+  width: 100%;
+  height: 400px; 
+  overflow: hidden;
+}
+
+.splide__list {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.splide__slide {
+  flex: 0 0 100%; 
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.splide__slide img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain; 
+  background-color: rgba(255, 255, 255, 0.05); 
+}
+
+.splide__arrows {
+  display: flex;
+}
+
+.splide__arrow {
+  position: absolute;
+  top: 190px; 
+  z-index: 10;
+  background: rgba(35, 58, 30, 0.8); 
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.splide__arrow svg {
+  fill: #ffffff;
+  width: 16px;
+  height: 16px;
+  transform: none;
+  transition: none;
+}
+
+.splide__arrow--next { 
+  right: 15px; 
+  left: auto;
+}
+
+.splide__arrow--prev { 
+  left: 15px; 
+  right: auto;
+}
+
+.splide__arrow--prev svg {
+  transform: scaleX(-1); 
+}
+
+.splide__pagination {
+  position: absolute;
+  bottom: -20px; 
+  left: 0; right: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  z-index: 20;
+}
+
+.splide__pagination li {
+  display: inline-flex;
+  margin: 0; padding: 0;
+}
+
+.splide__pagination__page {
+  background: rgba(35, 58, 30, 0.4); 
+  border: none;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.splide__pagination__page.is-active {
+  background: #233a1e; 
+  transform: scale(1.1);
+  width: 24px; 
+  border-radius: 5px;
+}
+
+/* ==========================================
+   9. GEOLOCATION & MAP STYLES
+   ========================================== */
+.location-subtitle-text {
+  margin-bottom: 5px;
+  font-size: 15px;
+  opacity: 0.95;
+}
+
+.map-responsive-container {
+  position: relative;
+  width: 100%;
+  height: 400px; 
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.map-responsive-container iframe,
+.map-static-fallback-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.location-meta-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  margin-top: 25px;
+}
+
+.location-meta-card {
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;
+}
+
+.location-meta-card h5 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #e2f0d9;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(226, 240, 217, 0.2);
+  padding-bottom: 6px;
+}
+
+.meta-row-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.meta-row-item:last-child {
+  margin-bottom: 0;
+}
+
+.closed-tag {
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.landmark-text {
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  text-align: left;
+  opacity: 0.9;
+}
+
+.landmark-text:last-child {
+  margin-bottom: 0;
+}
+
+.location-action-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.location-navigate-btn {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #233a1e;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: 25px; 
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.location-navigate-btn:hover {
+  background-color: #2e4d27;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* ==========================================
+   10. ENTRY ANIMATIONS
+   ========================================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes logoScaleUp {
+  from { opacity: 0; background-size: 0px; }
+  to { opacity: 1; background-size: min(450px, 75vw); }
+}
+
+/* ==========================================
+   11. MEDIA QUERIES (RESPONSIVE ENGINE)
+   ========================================== */
+
+/* Tablet & Mobile Layout Controls */
+@media (max-width: 768px) {
+  .navbar {
+    width: 90%;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 12px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    z-index: 1001;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    background: rgba(35, 58, 30, 0.98);
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    padding: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  .nav-links.active {
+    max-height: 420px;
+    opacity: 1;
+    padding: 20px 0;
+  }
+
+  .nav-links a {
+    display: block;
+    text-align: center;
+    padding: 14px 0;
+    width: 100%;
+    font-size: 16px;
+    color: #ffffff;
+  }
+
+  .comparison-slider,
+  .map-responsive-container {
+    height: 260px;
+  }
+
+  .splide {
+    max-width: 100%;
+    height: 270px;
+  }
+  
+  .splide__track,
+  .splide__slide img {
+    height: 240px;
+  }
+
+  .splide__arrow {
+    top: 110px;
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* Smart Phone Layout Controls */
+@media (max-width: 550px) {
+  .custom-form-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .custom-form-label {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .custom-form-inputs-split {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* Medium Breakpoint Grid Tuning */
+@media (min-width: 600px) and (max-width: 899px) {
+  .tree-row.row-split,
+  .tree-row.row-bottom-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+}
+
+/* Desktop Flat Layout Controls */
 @media (min-width: 768px) {
   .navbar {
-    justify-content: center; 
-    padding: 20px;
+    width: max-content; 
+    max-width: 90%; 
+    min-width: unset; 
+    padding: 0 30px; 
+    justify-content: center;
   }
 
   .menu-toggle {
     display: none;
   }
 
-  .nav-links {
+  .navbar .nav-links {
     display: flex;
     position: static; 
     flex-direction: row;
     background-color: transparent; 
-    padding: 0;
-    gap: 40px;
+    gap: clamp(14px, 2.5vw, 32px); 
     width: auto;
     border-bottom: none;
-  }
-  
-  .nav-links a {
-    color: #ffffff; 
-  }
-
-  .hero-title {
-    letter-spacing: 4px;
+    max-height: none;
+    opacity: 1;
+    padding: 0;
+    overflow: visible;
+    box-shadow: none;
   }
 
-  .hero-subtitle {
-    letter-spacing: 11px; 
+  .navbar .nav-links a {
+    font-size: 14px; 
+    white-space: nowrap; 
+    padding: 0;
+    width: auto;
+    text-align: left;
+  }
+
+  .hero-title { letter-spacing: 4px; }
+  .hero-subtitle { letter-spacing: 11px; }
+
+  .location-meta-grid {
+    flex-direction: row;
+  }
+
+  .location-meta-card {
+    flex: 1;
   }
 }
 
+/* Large Monitor Scaling */
 @media (min-width: 900px) {
   .content-frame {
     max-width: 1100px; 
@@ -372,721 +872,3 @@ body {
     max-width: 180px;
   }
 }
-
-@media (min-width: 600px) and (max-width: 899px) {
-  .tree-row.row-split,
-  .tree-row.row-bottom-grid {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-}
-/* ==========================================
-   7. INTERACTIVE BEFORE/AFTER SLIDER STYLES
-   ========================================== */
-.comparison-slider {
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  height: 400px; /* Adjust wrapper display heights here as needed */
-  margin: 30px auto 10px auto;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  user-select: none;
-}
-
-/* Force both images to absolute fill the shared canvas box dimensions */
-.slider-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-}
-
-/* The real render sits as the passive backdrop base */
-.real-view {
-  display: block;
-}
-
-/* The line container clips the top layer based on width percentage */
-.resize-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%; /* Initialized starting snapshot division split */
-  height: 100%;
-  overflow: hidden;
-}
-
-/* Forces line width tracking to retain absolute parent metrics without squeezing */
-.resize-container .slider-image {
-  width: 900px; /* Must match the max-width metric of your slider wrapper bounding box */
-  max-width: none;
-}
-
-/* ==========================================
-   7. INTERACTIVE BEFORE/AFTER SLIDER STYLES
-   ========================================== */
-.slider-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  opacity: 0;
-  cursor: ew-resize;
-  z-index: 10;
-
-  /* ADD THIS EXACT LINE FOR IPAD/IOS SAFARI COMPATIBILITY */
-  touch-action: none; /* Stops iOS from treating your swipe as a page scroll gesture */
-}
-
-
-/* The structural vertical partition bar indicator */
-.slider-divider {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 3px;
-  height: 100%;
-  background-color: #ffffff;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  pointer-events: none;
-  z-index: 5;
-}
-
-/* Make sure the component container shrinks proportionally on small smartphone displays */
-@media (max-width: 768px) {
-  .comparison-slider {
-    height: 250px;
-  }
-}
-/* ==========================================
-   8. GLASSMORPHIC INLINE CONTACT FORM
-   ========================================== */
-/* Align section title to the left to match reference image */
-.contact-header-title {
-  text-align: left !important;
-  font-size: 24px;
-  margin-bottom: 25px;
-  color: #e2f0d9;
-}
-
-.custom-contact-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-/* Row wrapper forcing label and input field on the same line */
-.custom-form-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  gap: 15px;
-
-  /* ADD THIS LINE: This drops each text box down to create beautiful spacing */
-    margin-bottom: 22px; 
-    
-}
-
-/* Forces top alignment specifically for the tall message row */
-.custom-form-row.message-row {
-  align-items: flex-start;
-}
-
-/* Set fixed width for labels to guarantee all input boxes align perfectly */
-.custom-form-label {
-  width: 110px;
-  min-width: 110px;
-  text-align: left;
-  font-size: 14px;
-  font-weight: 600;
-  color: #e2f0d9;
-}
-
-.custom-form-field-wrapper {
-  flex: 1;
-  width: 100%;
-}
-
-/* Grid splitting Surname and First Name equally */
-.custom-form-inputs-split {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  width: 100%;
-}
-
-/* Rounded, glassmorphic fields matching theme */
-.custom-contact-form input,
-.custom-contact-form textarea {
-  width: 100%;
-  padding: 10px 18px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 20px; /* Fully rounded pill fields to match reference layout */
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  color: #ffffff;
-  outline: none;
-  transition: all 0.2s ease;
-}
-
-/* Square out textarea corners slightly more than inputs for text readability */
-.custom-contact-form textarea {
-  border-radius: 12px;
-}
-
-.custom-contact-form input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.custom-contact-form input:focus,
-.custom-contact-form textarea:focus {
-  background-color: rgba(255, 255, 255, 0.15);
-  border-color: #e2f0d9;
-  box-shadow: 0 0 10px rgba(226, 240, 217, 0.2);
-}
-
-/* Align button to the bottom-right corner */
-.custom-form-action-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 5px;
-}
-
-/* Theme-matched submit button */
-.custom-submit-btn {
-  background-color: #233a1e; /* Matches your core dark green theme color */
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 10px 35px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.custom-submit-btn:hover {
-  background-color: #2e4d27;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-}
-
-.custom-submit-btn:active {
-  transform: translateY(0);
-}
-
-/* Responsive flow for smaller mobile devices */
-@media (max-width: 550px) {
-  .custom-form-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-  .custom-form-label {
-    width: 100%;
-    min-width: unset;
-  }
-  .custom-form-inputs-split {
-    flex-direction: column;
-    gap: 10px;
-  }
-}
-@media (min-width: 768px) {
-  /* ... your other navbar media properties ... */
-  
-  .nav-links {
-    display: flex;
-    position: static; 
-    flex-direction: row;
-    background-color: transparent; 
-    gap: 40px;
-    width: auto;
-    border-bottom: none;
-    
-    /* Forces desktop to ignore mobile collapse constraints */
-    max-height: none !important;
-    opacity: 1 !important;
-    padding: 0 !important;
-    overflow: visible !important;
-  }
-}
-/* ==========================================
-   9. GALLERY CAROUSEL DESIGN THEME OVERRIDES
-   ========================================== */
-.carousel-section-divider {
-  margin: 40px 0 20px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  width: 100%;
-}
-
-.splide {
-  position: relative !important;
-  width: 100%;
-  max-width: 900px; 
-  height: 420px;    /* 1. LOCK CONTAINER HEIGHT: Stops vertical pixel shifts during transitions */
-  margin: 0 auto;   
-  padding: 10px 0;
-  overflow: hidden !important; 
-}
-
-.splide__track {
-  width: 100%;
-  height: 400px;    /* Matches image frame heights precisely */
-  overflow: hidden !important;
-}
-
-.splide__list {
-  display: flex !important;
-  flex-direction: row !important;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.splide__slide {
-  flex: 0 0 100% !important; 
-  width: 100% !important;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.splide__slide img {
-  width: 100%;
-  height: 400px;
-  object-fit: contain; 
-  background-color: rgba(255, 255, 255, 0.05); 
-}
-
-/* Fixes arrow buttons layout, positioning, and drops the jumpy transform property */
-.splide__arrows {
-  display: flex;
-}
-
-.splide__arrow {
-  position: absolute;
-  /* 2. SOLID ABSOLUTE POSITIONING: Replaces translateY(-50%) to stabilize alignment */
-  top: 190px !important; /* Locks them right in the middle point of your 400px frames */
-  z-index: 10;
-  background: rgba(35, 58, 30, 0.8) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 50% !important;
-  width: 40px !important;
-  height: 40px !important;
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.splide__arrow svg {
-  fill: #ffffff !important;
-  width: 16px;
-  height: 16px;
-  transition: none !important; /* Stops the browser engine from animating icons during autoplay transitions */
-}
-
-/* ==========================================
-   FIX CAROUSEL ARROWS PLACEMENT & NATIVE DIRECTION
-   ========================================== */
-
-/* 1. Reset all manual CSS rotations so icons point in their true native directions */
-.splide__arrow svg {
-  fill: #ffffff !important;
-  width: 16px;
-  height: 16px;
-  transform: none !important; /* Clears previous rotations */
-  transition: none !important;
-}
-
-/* 2. Position the TRUE Next slide action button on the RIGHT side */
-.splide__arrow--next { 
-  right: 15px !important;  
-  left: auto !important;
-}
-
-/* 3. Position the TRUE Previous slide action button on the LEFT side */
-.splide__arrow--prev { 
-  left: 15px !important;   
-  right: auto !important;
-}
-
-/* 4. Flip ONLY the left arrow button icon box 180 degrees so it naturally points to the left */
-.splide__arrow--prev svg {
-  transform: scaleX(-1) !important; /* Flips the arrow horizontally to point left */
-}
-
-
-/* Adjust layout scaling safely for mobile devices */
-@media (max-width: 768px) {
-  .splide {
-    max-width: 100%;
-    height: 270px; /* Lock height on mobile screen viewports */
-  }
-  .splide__track {
-    height: 240px;
-  }
-  .splide__slide img {
-    height: 240px; 
-  }
-  .splide__arrow {
-    top: 110px !important; /* Lock absolute height on mobile screens */
-    width: 34px !important;
-    height: 34px !important;
-  }
-}
-
-/* ==========================================
-   10. CAROUSEL PAGINATION DOTS (Forced Horizontal Row)
-   ========================================== */
-/* Force the container to behave as a clean, single horizontal line row */
-.splide__pagination {
-  position: absolute !important;
-  bottom: -20px !important; /* Pushes the dots below the bottom edge of the image */
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;
-  
-  /* CRITICAL FORCING: Swaps vertical stacking to a horizontal layout row */
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: center !important;
-  align-items: center !important;
-  
-  gap: 10px !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  list-style: none !important;
-  z-index: 20 !important;
-}
-
-/* Ensure each individual list item stays flat on the same line */
-.splide__pagination li {
-  display: inline-flex !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Individual indicator pips styling */
-.splide__pagination__page {
-  background: rgba(35, 58, 30, 0.4) !important; /* Premium dark green tint */
-  border: none !important;
-  border-radius: 50% !important;
-  width: 10px !important;
-  height: 10px !important;
-  padding: 0 !important;
-  cursor: pointer !important;
-  transition: all 0.2s ease !important;
-  display: block !important;
-}
-
-/* Enhances the active tracking indicator capsule */
-.splide__pagination__page.is-active {
-  background: #233a1e !important; /* Solid dark green matches theme headers */
-  transform: scale(1.1) !important;
-  width: 24px !important;         /* Stretches into a modern horizontal pill */
-  border-radius: 5px !important;
-}
-/* ==========================================
- 10. ENTRY ANIMATIONS (Isolated Bugfix v1.2.3)
- ========================================== */
-
-/* Smooth fade and slide up for text overlay */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Animates ONLY the background image size inside its own layer */
-@keyframes logoScaleUp {
-    from {
-        opacity: 0;
-        background-size: 0px; /* Starts completely shrunk */
-    }
-    to {
-        opacity: 1; /* Clean background opacity baseline */
-        background-size: min(450px, 75vw); /* Settles back to exact design bounds */
-    }
-}
-/* ==========================================
- 12. RESPONSIVE FLOATING NAVBAR DROPDOWN (Finalized v2.1.6)
- ========================================== */
-@media (max-width: 768px) { /* Restored back to 768px to keep desktop view completely flat */
-    .navbar {
-        width: 90% !important;
-        height: 55px !important;
-        display: flex !important;
-        justify-content: center !important; /* Centers the icon inside your capsule */
-        align-items: center !important;
-        padding: 0 20px !important;
-        border-radius: 12px !important;
-    }
-
-    .menu-toggle {
-        display: flex !important; 
-        flex-direction: column !important;
-        justify-content: space-between !important;
-        width: 24px !important;
-        height: 18px !important;
-        z-index: 1001 !important;
-    }
-
-    .menu-toggle .bar {
-        display: block !important;
-        width: 100% !important;
-        height: 3px !important;
-        background-color: #ffffff !important; 
-        border-radius: 2px !important;
-    }
-    
-    /* RESTORES SMOOTH VERTICAL OPEN/CLOSE DRIFT TRANSITIONS */
-    .nav-links {
-        display: flex !important; /* Overrides display none to let layout flex stack */
-        flex-direction: column !important;
-        position: absolute !important;
-        top: 65px !important;     /* Positions it neatly right below your bar */
-        left: 50% !important;
-        transform: translateX(-50%) !important; /* Centers the dropdown box layout perfectly */
-        width: 100% !important;
-        background: rgba(35, 58, 30, 0.98) !important;
-        border-radius: 15px !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
-        padding: 0 !important;
-        
-        /* Transition rules tracking from your original source files */
-        max-height: 0 !important;
-        opacity: 0 !important;
-        overflow: hidden !important;
-        transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out !important;
-    }
-
-    /* Displays your drawer layout when active toggles trigger */
-    .nav-links.active {
-        max-height: 420px !important;
-        opacity: 1 !important;
-        padding: 20px 0 !important;
-    }
-
-    .nav-links a {
-        display: block !important;
-        text-align: center !important;
-        padding: 14px 0 !important;
-        width: 100% !important;
-        font-size: 16px !important;
-        color: #ffffff !important;
-    }
-}
-/* ==========================================
- 11. RESPONSIVE EMBEDDED MAP STYLES (v3.1.0)
- ========================================== */
-.location-subtitle-text {
- margin-bottom: 5px;
- font-size: 15px;
- opacity: 0.95;
-}
-
-.map-responsive-container {
- position: relative;
- width: 100%;
- margin-top: 20px;
- border-radius: 12px;
- overflow: hidden;
- border: 1px solid rgba(255, 255, 255, 0.25);
- box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-}
-
-.map-responsive-container iframe {
- display: block;
- width: 100%;
- height: 400px;
-}
-
-/* Isolated Meta Block Layout Grid */
-.location-meta-grid {
- display: flex;
- flex-direction: column;
- gap: 20px;
- width: 100%;
- margin-top: 25px;
-}
-
-.location-meta-card {
- background-color: rgba(255, 255, 255, 0.07);
- border: 1px solid rgba(255, 255, 255, 0.15);
- border-radius: 10px;
- padding: 20px;
- text-align: left;
-}
-
-.location-meta-card h5 {
- font-size: 16px;
- font-weight: 700;
- margin-bottom: 12px;
- color: #e2f0d9;
- letter-spacing: 0.5px;
- border-bottom: 1px solid rgba(226, 240, 217, 0.2);
- padding-bottom: 6px;
-}
-
-.meta-row-item {
- display: flex;
- justify-content: space-between;
- font-size: 13.5px;
- margin-bottom: 8px;
- color: #ffffff;
-}
-
-.meta-row-item:last-child {
- margin-bottom: 0;
-}
-
-.closed-tag {
- opacity: 0.6;
- font-style: italic;
-}
-
-.landmark-text {
- font-size: 13.5px;
- line-height: 1.5 !important;
- margin-bottom: 10px;
- text-align: left !important;
- opacity: 0.9;
-}
-
-.landmark-text:last-child {
- margin-bottom: 0;
-}
-
-/* Isolated Navigation External Action Button Configuration */
-.location-action-wrapper {
- width: 100%;
- display: flex;
- justify-content: center;
- margin-top: 25px;
-}
-
-.location-navigate-btn {
- display: inline-block;
- text-decoration: none;
- background-color: #233a1e;
- color: #ffffff;
- border: 1px solid rgba(255, 255, 255, 0.2);
- padding: 12px 30px;
- font-family: 'Montserrat', sans-serif;
- font-size: 13.5px;
- font-weight: 600;
- border-radius: 25px; /* Pill profile style shape */
- cursor: pointer;
- transition: all 0.2s ease;
- box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.location-navigate-btn:hover {
- background-color: #2e4d27;
- transform: translateY(-2px);
- box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-}
-
-/* Desktop Responsive Layout Engine Override rules */
-@media (min-width: 768px) {
- .location-meta-grid {
-   flex-direction: row; /* Horizontal splitting array row structure */
- }
- .location-meta-card {
-   flex: 1; /* Balances both cards cleanly on desktops */
- }
-}
-
-@media (max-width: 768px) {
- .map-responsive-container iframe {
-   height: 260px; /* Adapts cleanly to smartphone screens */
- }
-}
-/* ==========================================
- 11. RESPONSIVE STATIC MAP INJECTIONS (v3.2.0)
- ========================================== */
-.map-static-fallback-img {
- display: block;
- width: 100%;
- height: 400px;
- object-fit: cover; /* Forces map image framework to clip natively onto your glass frame curves */
- background-color: rgba(255, 255, 255, 0.05);
-}
-
-/* Maintain variable structural heights for responsive smartphone targets */
-@media (max-width: 768px) {
- .map-static-fallback-img {
-   height: 260px;
- }
-}
-/* ==========================================
- 11. LEAFLET ENGINE MAP DIMENSIONS (v3.5.0)
- ========================================== */
-.map-responsive-container {
-  width: 100%;
-  height: 400px; /* Forces explicit container size matrix initialization */
-  margin-top: 20px;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  z-index: 1; /* Keeps map layers cleanly below floating dropdown sub-navigation bars */
-}
-
-@media (max-width: 768px) {
-  .map-responsive-container {
-    height: 260px; /* Responsive height safety clamp for mobile phone views */
-  }
-}
-/* ==========================================
- 13. NAVBAR FLEXIBLE SIZE & GAP REPAIR (v3.0.2)
- ========================================== */
-@media (min-width: 768px) {
-  /* 1. Allows the glass capsule to auto-fit your links cleanly */
-  .navbar {
-    width: max-content !important;  /* Collapses the massive empty side gaps */
-    max-width: 90% !important;      /* Safety cushion for medium desktop screens */
-    min-width: unset !important;    /* Breaks old sizing constraints */
-    padding: 0 30px !important;     /* Creates a perfect, fixed margin on the left/right ends */
-  }
-
-  /* 2. Controls link row clustering spacing explicitly */
-  .navbar .nav-links {
-    display: flex !important;
-    gap: clamp(14px, 2.5vw, 32px) !important; /* Scales smoothly so text never breaks container walls */
-    width: auto !important;
-  }
-
-  /* 3. Normalizes text size properties */
-  .navbar .nav-links a {
-    font-size: 14px !important;      /* Kept at a clean, professional readable metric */
-    white-space: nowrap !important;  /* Absolute rule ensuring strings stay on one line */
-  }
-}
-
-
