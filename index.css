@@ -105,9 +105,9 @@ body {
 
 /* Active state triggered by your JavaScript click */
 .nav-links.active {
-  max-height: 300px;             /* Gives it enough room to fully unfold its links */
+  max-height: 420px;             /* Gives it enough room to fully unfold its links */
   opacity: 1;                    /* Fades the links cleanly back into view */
-  padding: 25px 0;               /* Smoothly expands padding back out */
+  padding: 20px 0;               /* Smoothly expands padding back out */
 }
 
 .nav-links a {
@@ -887,7 +887,7 @@ body {
 
     /* Displays your drawer layout when active toggles trigger */
     .nav-links.active {
-        max-height: 320px !important;
+        max-height: 420px !important;
         opacity: 1 !important;
         padding: 20px 0 !important;
     }
@@ -1088,4 +1088,5 @@ body {
     white-space: nowrap !important;  /* Absolute rule ensuring strings stay on one line */
   }
 }
+
 
