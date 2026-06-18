@@ -52,7 +52,29 @@ body {
     background: rgba(255, 255, 255, 0.15); /* Semi-transparent white backing */
     backdrop-filter: blur(15px);           /* Smooth hardware-accelerated background frost */
     -webkit-backdrop-filter: blur(15px);   /* Safari stability patch */
-    
+    /* ADD THIS IMMEDIATELY BELOW THE NAVBAR BLOCK */
+.menu-toggle {
+    display: none;             /* Hides the icon on desktop view screens */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.menu-toggle .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #ffffff; /* Sets the default bar asset color to clean white */
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
     /* Rounded Rectangular Edges and Depth Contours */
     border-radius: 15px;                   /* Smoothly rounded corners */
     border: 1px solid rgba(255, 255, 255, 0.25); /* Subtle glass edge highlight line */
@@ -811,5 +833,74 @@ body {
         background-size: min(450px, 75vw); /* Settles back to exact design bounds */
     }
 }
+/* ==========================================
+ 12. RESPONSIVE FLOATING NAVBAR DROPDOWN (Finalized v2.1.6)
+ ========================================== */
+@media (max-width: 768px) { /* Restored back to 768px to keep desktop view completely flat */
+    .navbar {
+        width: 90% !important;
+        height: 55px !important;
+        display: flex !important;
+        justify-content: center !important; /* Centers the icon inside your capsule */
+        align-items: center !important;
+        padding: 0 20px !important;
+        border-radius: 12px !important;
+    }
+
+    .menu-toggle {
+        display: flex !important; 
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        width: 24px !important;
+        height: 18px !important;
+        z-index: 1001 !important;
+    }
+
+    .menu-toggle .bar {
+        display: block !important;
+        width: 100% !important;
+        height: 3px !important;
+        background-color: #ffffff !important; 
+        border-radius: 2px !important;
+    }
+    
+    /* RESTORES SMOOTH VERTICAL OPEN/CLOSE DRIFT TRANSITIONS */
+    .nav-links {
+        display: flex !important; /* Overrides display none to let layout flex stack */
+        flex-direction: column !important;
+        position: absolute !important;
+        top: 65px !important;     /* Positions it neatly right below your bar */
+        left: 50% !important;
+        transform: translateX(-50%) !important; /* Centers the dropdown box layout perfectly */
+        width: 100% !important;
+        background: rgba(35, 58, 30, 0.98) !important;
+        border-radius: 15px !important;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
+        padding: 0 !important;
+        
+        /* Transition rules tracking from your original source files */
+        max-height: 0 !important;
+        opacity: 0 !important;
+        overflow: hidden !important;
+        transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out !important;
+    }
+
+    /* Displays your drawer layout when active toggles trigger */
+    .nav-links.active {
+        max-height: 320px !important;
+        opacity: 1 !important;
+        padding: 20px 0 !important;
+    }
+
+    .nav-links a {
+        display: block !important;
+        text-align: center !important;
+        padding: 14px 0 !important;
+        width: 100% !important;
+        font-size: 16px !important;
+        color: #ffffff !important;
+    }
+}
+
 
 
