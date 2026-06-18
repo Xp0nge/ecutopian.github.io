@@ -1063,5 +1063,29 @@ body {
     height: 260px; /* Responsive height safety clamp for mobile phone views */
   }
 }
+/* ==========================================
+ 13. NAVBAR FLEXIBLE SIZE & GAP REPAIR (v3.0.2)
+ ========================================== */
+@media (min-width: 768px) {
+  /* 1. Allows the glass capsule to auto-fit your links cleanly */
+  .navbar {
+    width: max-content !important;  /* Collapses the massive empty side gaps */
+    max-width: 90% !important;      /* Safety cushion for medium desktop screens */
+    min-width: unset !important;    /* Breaks old sizing constraints */
+    padding: 0 30px !important;     /* Creates a perfect, fixed margin on the left/right ends */
+  }
 
+  /* 2. Controls link row clustering spacing explicitly */
+  .navbar .nav-links {
+    display: flex !important;
+    gap: clamp(14px, 2.5vw, 32px) !important; /* Scales smoothly so text never breaks container walls */
+    width: auto !important;
+  }
+
+  /* 3. Normalizes text size properties */
+  .navbar .nav-links a {
+    font-size: 14px !important;      /* Kept at a clean, professional readable metric */
+    white-space: nowrap !important;  /* Absolute rule ensuring strings stay on one line */
+  }
+}
 
